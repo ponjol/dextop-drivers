@@ -1,0 +1,7 @@
+
+{
+  "schemaVersion": 2,
+  "models": [
+    { "model": "Dell-Pro14-PC14250", "manifest": "dell-pro14-pc14250.json" }
+  ]
+}

@@ -1,23 +1,6 @@
 
 {
-  "model": "Dell Pro 14 PC14250",
-  "manufacturer": "Dell Inc.",
-  "driverSubfolders": [
-    "drivers/dell/pro14/pc14250/ai-boost",
-    "drivers/dell/pro14/pc14250/audio",
-    "drivers/dell/pro14/pc14250/biometrics-fingerprint",
-    "drivers/dell/pro14/pc14250/bluetooth",
-    "drivers/dell/pro14/pc14250/camera",
-    "drivers/dell/pro14/pc14250/chipset-innovation-platform",
-    "drivers/dell/pro14/pc14250/chipset-platform-monitoring",
-    "drivers/dell/pro14/pc14250/chipset-serial-io",
-    "drivers/dell/pro14/pc14250/dynamic-tuning",
-    "drivers/dell/pro14/pc14250/graphics",
-    "drivers/dell/pro14/pc14250/hid-event-filter",
-    "drivers/dell/pro14/pc14250/management-engine",
-    "drivers/dell/pro14/pc14250/network-ethernet",
-    "drivers/dell/pro14/pc14250/network-wifi",
-    "drivers/dell/pro14/pc14250/storage-rst",
-    "drivers/dell/pro14/pc14250/studio-effects"
-  ]
+  "releaseTag": "v1.0.0",
+  "asset": "pc14250_drivers.zip",
+  "extractTo": "drivers"
 }
