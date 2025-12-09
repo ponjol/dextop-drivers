@@ -1,0 +1,11 @@
+# Change log - Created 09/12/25
+
+## [0.1.0] - 09/12/25
+### Added
+- Repository built
+- Driver structure built for Dell Pro 14 PC14250 (latest drivers)
+- Created get-filelist.ps1 script
+
+
+## Future improvements/ideas
+- Here we can put some ideas going forward
