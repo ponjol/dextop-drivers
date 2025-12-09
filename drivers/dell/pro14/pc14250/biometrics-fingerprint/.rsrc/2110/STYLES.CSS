@@ -1,0 +1,498 @@
+﻿
+/* Common styles across all IE versions */
+/* WARNING: only use exact px size units for OS DPI independant sizing (EVEN FONTS!) */
+
+
+body
+{
+	background: #ffffff;
+	padding: 0;
+	margin: 0;
+	border-width: 1px;
+	border-color:#575859;
+	border-style:solid;
+	border-collapse:collapse;
+	color: #0E0E0E;
+	font: normal normal normal 100% Roboto, Roboto, sans-serif;
+	font-size: 12px; /* only use px size for OS DPI independant sizing (not pt) */
+	cursor: default;
+}
+
+table
+{
+ 	padding: 0;
+	margin: 0;
+	border: 0px;
+	border-collapse: collapse;
+}
+
+tr
+{
+	padding: 0;
+	margin: 0;
+	border-collapse:collapse
+}
+
+td
+{
+	padding: 0;
+	margin: 0;
+	border: 0px;
+	border-collapse: collapse;	
+}
+
+button{
+
+	text-decoration: none;
+    padding: 0;
+	border: 0px;
+	border-collapse: collapse;	
+    cursor:pointer;
+	list-style-type: none;
+	width:100px;
+	height:29px;
+}
+
+
+
+img
+{
+	border:0px
+}
+
+a
+{
+	text-decoration: none;
+}
+
+#header
+{
+	background: #0672CB;
+	height: 50px;
+	width:100%;
+	align-items:center; 
+	display:flex;
+}
+
+#headLogoLPad
+{
+	width: 20px;
+    height: 20px;
+    margin-right:10px;
+}
+
+#headLogo
+{
+    width: 20px;
+    height: 20px;
+	margin-bottom:15px;
+}
+
+
+#headText
+{
+	color: white;
+	font-size: 20px;
+	text-align: left;
+}
+
+#headCloser
+{
+	width: 20px;
+	height: 20px;
+}
+
+.Banner {
+	position: relative;
+	height: auto;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	left: 30px;
+	width: 662px;
+	display: flex;
+	line-height: 24px;
+	letter-spacing: 0.5px;
+}
+
+.BannerWarningColor {
+	background-color: #FEEFCB;
+}
+
+.BannerSuccessColor {
+	background-color: #E9F5CE;
+}
+
+.BannerFailColor {
+	background-color: #FFE0E3;
+}
+
+
+.closer input
+{ 
+	cursor:pointer;
+	width: 30px; 
+	height: 30px; 
+	background: transparent url(close_normal.png) no-repeat; 
+    padding: 0;
+	border: 0px;
+	border-collapse: collapse;
+    vertical-align:middle;
+}
+
+input.closer:disabled:hover {
+	background: transparent url(close_normal.png) no-repeat !important;
+	cursor: not-allowed !important
+} 
+
+.closer input:hover 
+{ 
+	cursor:pointer;
+	background: transparent url(close_hover.png) no-repeat; 
+}
+
+.infocloser input
+{
+    cursor:pointer; 
+	width: 30px; 
+	height: 30px; 
+	background: transparent url(close_info.png) no-repeat; 
+    padding: 0;
+	border: 0px;
+	border-collapse: collapse;
+    vertical-align:middle;
+}
+
+.infocloser input:hover 
+{ 
+	cursor:pointer;
+	background: transparent url(close_info_hover.png) no-repeat; 
+}
+
+.grid
+{
+	position:relative;
+	top: 0px;
+	left: 30px;
+	width: 442px;
+}
+
+.grid_bios {
+	position: relative;
+	top: 0px;
+	left: 30px;
+	width: 682px;
+}
+
+.title
+{
+	color: #0E0E0E;
+	font-size: 20px;
+	vertical-align:top;
+	font-weight:500;
+	line-height: 28px;
+}
+
+.title input
+{
+	cursor:pointer;
+	display: inline-block;  
+	width: 20px; 
+	height: 20px; 
+	background: transparent url(info_button_normal.png) no-repeat;
+    padding: 0;
+	margin-left: 10px;
+	border: 0px;
+	border-collapse: collapse;	
+} 
+
+.title input:hover 
+{
+	background: transparent url(info_button_normal.png) no-repeat;
+}
+
+.separator
+{
+	border-bottom: 1px;
+	border-color:#e1dddd;
+	border-style:solid;
+    border-collapse:collapse;
+   
+}
+
+.link {
+	text-decoration: underline;
+	vertical-align: bottom;
+	text-align: left;
+	color: #0672CB;
+	font-size: 12px;
+	font: normal normal normal 100% Roboto, Roboto, sans-serif;
+	cursor: pointer;
+}
+
+.button
+{
+	cursor:pointer;
+	padding-top:6px;
+	padding-bottom:6px;
+	padding-left:10px;
+	padding-right:10px;
+	min-width:100px;
+	width:auto;
+	height:40px;
+	font-weight: 400;
+	text-align: center;
+	box-sizing: border-box;
+	white-space: nowrap;
+	border-radius: 4px;
+	
+}
+
+.button li
+{
+	list-style-type: none;
+	display: inline-block;
+	float: left;
+	line-height: 29px;
+	padding: 0;
+	margin: 0;
+}
+
+.action
+{
+	margin: 0;
+}
+
+.info
+{
+	width: 364px;
+	height: 23px;
+}
+
+.lastinfo
+{
+	width: 364px;
+	height: 23px;
+}
+
+
+.primary_up 
+{
+	color: #FFFFFF;
+	background-color: #0672CB;
+	border: none;
+}
+
+.primary_up a
+{
+	color: #FFFFFF;
+}
+
+
+.primary_hover 
+{
+	color: #FFFFFF;
+	background-color: #00468B;
+	border: none;
+}
+
+.primary_hover a
+{
+	color: #FFFFFF;
+}
+.secondary_up
+{
+	color: #0672CB;
+	background-color: #FFFFFF;
+	border: 2px solid #0672CB;
+}
+
+.secondary_up a
+{
+	color: #0672CB;
+}
+
+
+.secondary_hover
+{
+	color: #00468B;
+	background-color: #D9F5FD;
+	border: 2px solid #0672CB;
+}
+
+.secondary_hover a
+{
+	color: #00468B;
+}
+
+
+.button:disabled,
+.button.disabled {
+	pointer-events: none;
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.button.primary_up:disabled,
+.button.primary_up.disabled {
+	background-color: #B6B6B6;
+	color: #0E0E0E;
+}
+
+.button.secondary_up:disabled,
+.button.secondary_up.disabled {
+	border: 2px solid #B6B6B6;
+	color: #B6B6B6;
+	background-color: #FFFFFF;
+}
+
+.hide
+{
+	visibility:hidden;
+}
+
+.remove {
+	display: none;
+}
+
+.display_inline {
+	display: inline;
+}
+
+#footer
+{
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	left:0px;
+}
+
+#footertext
+{
+	color: #575859;
+	font-size: 11px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* to Align the checkbox and Text both */
+.custom-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 5px; /* space between checkbox and text */
+	user-select: none; /* prevents accidental text selection when clicking. */
+	cursor: pointer;
+	font-size: 12px;
+}
+
+	/* Hides the native checkbox so we can replace it with a custom-styled one (.checkmark). */
+.custom-checkbox input {
+	display: none;
+}
+
+/* visual layout of checkbox - rectangle */
+.checkmark {
+	width: 12px;
+	height: 12px;
+	border: 1px solid #0E0E0E;
+	position: relative;
+	flex-shrink: 0;
+	background-color: #FFFFFF;
+}
+
+/*  Changes the checkbox color when selected */
+.custom-checkbox input:checked + .checkmark {
+	background: #0672CB;
+	border-color: #0672CB;
+}
+
+/* Add round mark */
+.custom-checkbox input:checked + .checkmark::after {
+	content: '';
+	position: absolute;
+	left: 4px;
+	top: 1px;
+	width: 3px;
+	height: 6px;
+	border: solid #FFFFFF;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.custom-radio {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	user-select: none;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.custom-radio input {
+	display: none;
+}
+
+.radiomark {
+	width: 12px;
+	height: 12px;
+	border: 1px solid #0E0E0E;
+	border-radius: 50%;
+	background-color: #FFFFFF;
+	position: relative;
+	flex-shrink: 0;
+}
+
+/*  Changes the radio color when selected */
+.custom-radio input:checked + .radiomark {
+	background: #0672CB;
+	border-color: #0672CB;
+}
+
+
+.custom-radio input:checked + .radiomark::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 5px;
+	height: 5px;
+	background-color:#FFFFFF;
+	border-radius: 50%;
+}
+
+/* Spinner for progress page */
+
+.spinner-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.spinner {
+	border: 6px solid #D2D2D2;
+	border-top: 6px solid #0672CB;
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	animation: spin 1s linear infinite;
+	margin-bottom: 10px;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#progress-text {
+	color: #333333;
+}
+

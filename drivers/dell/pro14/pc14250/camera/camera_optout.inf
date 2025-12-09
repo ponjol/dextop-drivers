@@ -1,0 +1,91 @@
+; Copyright (c) CompanyName. All rights reserved.
+
+[Version]
+Signature="$Windows NT$"
+Class=Camera
+ClassGuid={ca3e7ab9-b4c3-4ae6-8251-579ef933890f}
+Provider=%CompanyName%
+CatalogFile=Camera_OptOut.cat
+DriverVer=06/27/2024,1.0.0.1
+PnpLockdown=1
+
+[Manufacturer]
+%CompanyName%=Device,NTamd64
+
+[Device.NTamd64]
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_558F&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5590&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5593&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5597&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_558E&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5599&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_558B&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5591&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_558D&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5598&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5596&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_558C&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_559A&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5595&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_559C&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0BDA&PID_5594&MI_00 
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0C45&PID_6753&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0C45&PID_6D51&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0C45&PID_6D23&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0C45&PID_6D52&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0C45&PID_6754&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0C45&PID_6A27&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_0C45&PID_6D24&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_1BCF&PID_2BD4&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_1BCF&PID_28D6&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_1BCF&PID_2BBB&MI_00
+%MyDevice.DeviceDesc%=MyDevice,USB\Vid_1BCF&PID_2BBA&MI_00
+
+[MyDevice]
+Include=usbvideo.inf, ks.inf, kscaptur.inf
+Needs=USBVideo.NT, KS.Registration, KSCAPTUR.Registration.NT
+
+[MyDevice.SERVICES]
+Include=usbvideo.inf
+Needs=USBVideo.NT.SERVICES
+
+[MyDevice.HW]
+Include=usbvideo.inf
+Needs=USBVideo.NT.HW
+AddReg=UpdateFSMEnableMsEffects.AddReg
+
+[UpdateFSMEnableMsEffects.AddReg]
+HKR,,UVC-FSMEnableMsEffects,0x00000004
+
+[MyDevice.WDF]
+Include=usbvideo.inf
+Needs=USBVideo.NT.WDF
+
+[WdmCompanionFilter_CompanionSect]
+CompanionServices = SecureUSBVideo
+
+[MyDevice.Interfaces]
+Include = usbvideo.inf
+Needs = usbvideo.NT.Interfaces
+AddInterface=%KSCATEGORY_CAPTURE%,Global,MyDevice.Interface
+AddInterface=%KSCATEGORY_VIDEO_CAMERA%,Global,MyDevice.Interface
+AddInterface=%KSCATEGORY_VIDEO%,Global,MyDevice.Interface
+
+[MyDevice.Interface]
+AddReg=MyDevice.Interface.AddReg
+ 
+[MyDevice.Interface.AddReg]
+HKR,,FriendlyName,,%MyDevice.FriendlyName%
+HKR,,FSMEnableMsEffects,0x00000004
+   
+[Strings]
+; Non-localizable
+KSCATEGORY_VIDEO_CAMERA    = "{E5323777-F976-4f5b-9B55-B94699C46E44}"
+KSCATEGORY_CAPTURE         = "{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_VIDEO           = "{6994AD05-93EF-11D0-A3CC-00A0C9223196}"
+
+; Localizable
+CompanyName="Dell Technologies"
+MyDevice.DeviceDesc        = "Camera AI Effect Opt-out"
+MyDevice.FriendlyName      = "Integrated Webcam"
+Package                    = "install source"

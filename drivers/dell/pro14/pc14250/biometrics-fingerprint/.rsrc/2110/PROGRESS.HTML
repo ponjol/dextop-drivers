@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>DUP Progress Screen</title> <!-- this is not actually used, but the IDEs complain with no title -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta http-equiv="page-enter" content="blendTrans(Duration=.33)" />
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Modified styles for legacy IE systems -->
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="ielegacy.css" />
+    <![endif]-->
+
+    <script type="text/javascript" src="script.js"></script>
+    <!-- WARNING: only use exact px size units for OS DPI independant sizing (EVEN FONTS!) -->
+</head>
+
+<body style="height:466px">
+    <div id="header">
+        <label id="headLogo" style="margin-left:21px;">
+            <img src="logo.png" alt=" " />
+        </label>
+        <label id="headText" style="margin-left:23px;margin-right:450px">Update Package<!-- sample text --></label>
+        <label id="headCloser" class="closer">
+            <input type="button" class="closer" id="btnDupClose" title="Exit Update Package" href="#" disabled style="pointer-events: none;" />
+        </label>
+        <!--<button id="headCloser" title="Exit Update Package" class="closer"></button>-->
+    </div>
+
+    <div style="white-space:pre;height:20px;"></div>
+
+    <!-- package description -->
+    <div class="grid_bios">
+        <div class="title" style="max-height:63px; width:630px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis">
+            <span id="duptitle" style="max-width: 530px; display: inline-block; overflow: hidden" title="DUP Description">Update package name<!-- sample text --></span>
+            <label id="headCloser" class="title">
+                <input type="button" id="lnkDupInfo" title="Click here for more update package details" href="#" />
+            </label>
+        </div>
+        <label style="color: #7E7E7E">
+            <span id="dupversion">v1.1 (A02)<!-- sample text --></span>
+            <span id="dupdate">March 26th, 2010<!-- sample text --></span>
+        </label>
+    </div><!-- package description ends-->
+
+    <div style="white-space:pre;height:65px;"></div>
+
+
+    <!--Progress Summary for DUP-->
+    <div class="grid_bios spinner-container">
+        <div class="spinner"></div>
+        <div id="progress-text" style="display:block; margin-top:10px">
+            Elapsed time: 0 min 0 seconds
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var timerId;
+            var secondsElapsed = 0;
+
+            function formatTime(seconds) {
+                var mins = Math.floor(seconds / 60);
+                var secs = seconds % 60;
+                return "Elapsed time: " + mins + " min " + secs + " seconds";
+            }
+
+            function startTimer() {
+                var elapsedLabel = document.getElementById("progress-text");
+                timerId = setInterval(function () {
+                    secondsElapsed++;
+                    if (elapsedLabel) {
+                        elapsedLabel.textContent = formatTime(secondsElapsed);
+                    }
+                }, 1000);
+            }
+
+            startTimer();
+        };
+    </script>
+
+    <div style="white-space:pre;height:80px;"></div>
+
+    <!-- Buttons -->
+    <div style="display:flex" class="grid_bios">
+        <button class="button primary_up" id="btnDupOPContinueDisable" disabled>
+            Continue
+        </button>
+        <button style="margin-left:15px" class="button secondary_up" id="btnDupOPCancelDisable" disabled>
+            Cancel
+        </button>
+    </div>
+
+
+</body>
+
+</html>

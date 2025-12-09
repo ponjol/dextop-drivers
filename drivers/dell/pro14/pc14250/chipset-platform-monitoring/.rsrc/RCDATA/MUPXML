@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MUPDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.dell.com/openmanage/cm/2/0/mupdefinition.xsd">
+  <packageinformation>
+    <installertype>mupinstaller</installertype>
+    <mupspecificationversion>3.0.0</mupspecificationversion>
+    <name>Intel Platform Monitoring Technology</name>
+    <packagegrouping>dch_package</packagegrouping>
+    <packagingtype>dch_inf_package</packagingtype>
+    <releasetype>DRVR</releasetype>
+    <subsystem>Chipset</subsystem>
+    <version>5.2.3.4</version>
+    <AppliesTo>
+      <DeviceInformation>Intel Platform Monitoring Technology</DeviceInformation>
+    </AppliesTo>
+    <supportedoperatingsystems>
+      <osidentifier name="Windows10" architecture="x64" />
+    </supportedoperatingsystems>
+    <content dchSupport="true" baseOSBuildNumber="16299">
+      <DeviceGroup supportedOSBuildNumber="16299">
+        <Device componentID="113020">
+          <PCIInfo vendorID="8086" deviceID="7D0D" />
+          <PCIInfo vendorID="8086" deviceID="AD0D" />
+          <Image type="DRVR" inftype="base" version="3.1.2.6">
+            <file>16299\Drivers\x64\ARL\intcpmt.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="16299" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="113020">
+          <PCIInfo vendorID="8086" deviceID="647D" />
+          <Image type="DRVR" inftype="base" version="5.2.3.4">
+            <file>16299\Drivers\x64\LNL\intcpmt.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="16299" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+      </DeviceGroup>
+    </content>
+  </packageinformation>
+</MUPDefinition>

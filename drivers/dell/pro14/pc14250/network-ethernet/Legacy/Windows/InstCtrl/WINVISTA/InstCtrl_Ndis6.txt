@@ -1,0 +1,56 @@
+; AutoDisableGigabit (8169 , 8168)
+; AutoLinkDownPhyOff (8169 , 8168)
+; AutoLinkDownPcieMacOff (8168 , 8101E)
+; S5WakeOnLan - (8169 , 8168 , 8101E)
+;
+; Example :
+; Remove the ';' will modify the parameter after installation
+;
+; Note :
+; For WOL setting, please choose one for them (unmark WOL_SETTING and its second line)
+
+;WOL_SETTING
+;WOL_PTN_AND_MAG
+;WOL_SETTING
+;WOL_MAG_ONLY
+;WOL_SETTING
+;WOL_POWER_SAVING_ONLY
+;WOL_SETTING
+;WOL_NONE
+
+;AutoDisableGigabit
+;1
+;AutoLinkDownPhyOff
+;1
+;AutoLinkDownPcieMacOff
+;1
+;S5WakeOnLan
+;1
+;S3S4WolLinkSpeed
+;1
+
+;EnableGreenEthernet
+;1
+
+;ForceMode
+;1
+
+;LogDisconnectEvent
+;0
+
+;Supp8168DPVirtualDevice
+
+KeepNewDrv
+
+;NotShowCardNotFoundMsg
+
+;S0MgcPkt
+;1
+
+
+Special InstCtrl
+
+;ChgInstLogPath
+;InstallLog.txt
+;WinDisk
+;system.sav\logs

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>DUP Main Screen</title> <!-- this is not actually used, but the IDEs complain with no title -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta http-equiv="page-enter" content="blendTrans(Duration=.33)" />
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Modified styles for legacy IE systems -->
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="ielegacy.css" />
+    <![endif]-->
+
+    <script type="text/javascript" src="script.js"></script>
+    <!-- WARNING: only use exact px size units for OS DPI independant sizing (EVEN FONTS!) -->
+</head>
+
+<body style="height:466px">
+    <div id="header">
+        <label id="headLogo" style="margin-left:21px;">
+            <img src="logo.png" alt=" "/>
+        </label>
+        <label id="headText" style="margin-left:23px;margin-right:450px">Update Package<!-- sample text --></label>
+        <label id="headCloser" class="closer">
+            <input type="button" class="closer" id="btnDupClose" title="Exit Update Package" href="#" />
+        </label>
+        <!--<button id="headCloser" title="Exit Update Package" class="closer"></button>-->
+    </div>
+
+    <div style="white-space:pre;height:20px;"></div>
+
+    <!-- package description -->
+    <div class="grid_bios">
+        <div class="title" style="max-height:63px; width:630px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">
+            <span id="duptitle" style="max-width: 530px; display: inline-block; overflow: hidden" title="DUP Description">Update package name<!-- sample text --></span>
+            <label id="headCloser" class="title">
+                <input type="button" id="lnkDupInfo" title="View Update Details" href="#" />
+            </label>
+        </div>
+        <label style="color: #7E7E7E">
+            <span id="dupversion">v1.1 (A02)<!-- sample text --></span>
+            <span id="dupdate">March 26th, 2010<!-- sample text --></span>
+        </label>
+    </div><!-- package description ends-->
+
+    <div style="white-space:pre;height:25px;"></div>
+
+    <!-- User choice of install/extract -->
+    <div class="grid_bios">
+        <label class="custom-radio" style="width:300px;">
+            <input type="radio" checked="checked" id="radioInstall" name="inst_ext" />
+            <span class="radiomark"></span>
+            <span>&nbsp&nbsp Install software updates on this PC (recommended)</span>
+        </label> <!-- space -->
+        <div style="white-space:pre;height:17px;"></div>
+        <label class="custom-radio" style="width:220px;">
+            <input type="radio" id="radioExtract" name="inst_ext" />
+            <span class="radiomark"></span>
+            <span>&nbsp&nbsp Extract files to this PC to install later</span>
+        </label>
+    </div>
+
+    <div style="white-space:pre;height:20px;"></div>
+
+    <!--Bitlocker Warning for BIOS DUP-->
+    <div class="Banner BannerWarningColor" id="biosWarning">
+        <label style="margin-right:10px; float:left; margin-top:5px;">
+            <input type="image" src="bitlocker_warning.png" />
+        </label>
+        <label style="float:left;">
+            <b>Caution:</b> This software update includes BIOS and firmware updates.
+            Your PC will need to restart to complete the installation. Close all open applications
+            and make sure your PC is plugged into a power source. Do not shut down your PC while we are
+            performing the update or it may cause permanent damage to your system.
+            Select the checkbox to temporarily suspend BitLocker installation.
+        </label>
+    </div>
+
+    <div style="white-space:pre;height:22px;"></div>
+
+    <!-- BitLocker Suspend Checkbox -->
+    <div class="grid_bios" id="blsSuspendButton">
+        <label style="height: 20px; width:600px; vertical-align: central; letter-spacing: 0.5px" class="custom-checkbox">
+            <input id="BitLockerSuspend" type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+            &nbsp I authorize Dell to temporarily suspend data encryption, like BitLocker, to install updates on my PC.
+        </label>
+    </div>
+
+
+    <div style="white-space:pre;height:30px;"></div>
+
+
+
+    <!-- Buttons-->
+    <div style="display:flex" class="grid_bios">
+        <button title="Click here to start installation..." class="button primary_up" id="btnDupOPContinue" onmouseover="javascript: SetPrimaryHover('btnDupOPContinue');" onmouseout="javascript: SetPrimaryNormal('btnDupOPContinue');">
+            CONTINUE
+        </button>
+        <button style="margin-left:15px" class="button secondary_up" id="btnDupOPCancel" onmouseover="javascript:SetSecondaryHover('btnDupOPCancel');" onmouseout="javascript:SetSecondaryNormal('btnDupOPCancel');">
+            CANCEL
+        </button>
+    </div>
+
+
+</body>
+
+</html>

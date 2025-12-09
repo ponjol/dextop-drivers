@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MUPDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.dell.com/openmanage/cm/2/0/mupdefinition.xsd">
+  <packageinformation>
+    <installertype>mupinstaller</installertype>
+    <mupspecificationversion>3.1.0</mupspecificationversion>
+    <name>Fingerprint Sensor Driver</name>
+    <packagegrouping>dch_package</packagegrouping>
+    <packagingtype>dch_inf_package</packagingtype>
+    <releasetype>DRVR</releasetype>
+    <subsystem>Security</subsystem>
+    <version>4.10.6.380</version>
+    <AppliesTo>
+      <DeviceInformation>Fingerprint Sensor Driver</DeviceInformation>
+    </AppliesTo>
+    <supportedoperatingsystems>
+      <osidentifier name="Windows10" architecture="x64" />
+    </supportedoperatingsystems>
+    <content dchSupport="true" baseOSBuildNumber="0">
+      <DeviceGroup supportedOSBuildNumber="0">
+        <Device componentID="110243">
+          <Generic>USB\VID_27C6&amp;PID_634C</Generic>
+          <Image type="DRVR" inftype="base" version="3.4.340.370">
+            <file>0\Drivers\Goodix_PID634C\GoodixMocUsb.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="0" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="110243">
+          <Generic>USB\VID_06CB&amp;PID_0173</Generic>
+          <Image type="DRVR" inftype="base" version="6.1.11.1164">
+            <file>0\Drivers\Synaptics_PID0173\synaWudfBioUsbUwp.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="0" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+      </DeviceGroup>
+    </content>
+  </packageinformation>
+</MUPDefinition>

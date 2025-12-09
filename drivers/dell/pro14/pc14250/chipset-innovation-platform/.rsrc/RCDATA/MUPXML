@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MUPDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.dell.com/openmanage/cm/2/0/mupdefinition.xsd">
+  <packageinformation>
+    <installertype>mupinstaller</installertype>
+    <mupspecificationversion>3.0.0</mupspecificationversion>
+    <name>Intel Innovation Platform Framework Driver</name>
+    <packagegrouping>dch_package</packagegrouping>
+    <packagingtype>dch_inf_package</packagingtype>
+    <releasetype>DRVR</releasetype>
+    <subsystem>Chipset</subsystem>
+    <version>2.2.10204.7</version>
+    <AppliesTo>
+      <DeviceInformation>Dell Laptops; Dell Pro Laptops; Dell Pro Max Laptops</DeviceInformation>
+    </AppliesTo>
+    <supportedoperatingsystems>
+      <osidentifier name="Windows10" architecture="x64" />
+    </supportedoperatingsystems>
+    <content dchSupport="true" baseOSBuildNumber="17763">
+      <DeviceGroup supportedOSBuildNumber="17763">
+        <Device componentID="110611">
+          <Generic>ACPI\INTC1042</Generic>
+          <Generic>ACPI\INTC1041</Generic>
+          <Generic>ACPI\INTC1046</Generic>
+          <Generic>ACPI\INTC1048</Generic>
+          <Generic>ACPI\INTC1049</Generic>
+          <Generic>ACPI\INTC1060</Generic>
+          <Generic>ACPI\INTC1061</Generic>
+          <Generic>ACPI\INTC1062</Generic>
+          <Generic>ACPI\INTC1063</Generic>
+          <Generic>ACPI\INTC1064</Generic>
+          <Generic>ACPI\INTC1065</Generic>
+          <Generic>ACPI\INTC1066</Generic>
+          <Generic>ACPI\INTC10A0</Generic>
+          <Generic>ACPI\INTC10A1</Generic>
+          <Generic>ACPI\INTC10A2</Generic>
+          <Generic>ACPI\INTC10A3</Generic>
+          <Generic>ACPI\INTC10A4</Generic>
+          <Generic>ACPI\INTC10A5</Generic>
+          <Generic>ACPI\INTC1068</Generic>
+          <Generic>ACPI\INTC1069</Generic>
+          <Generic>ACPI\INTC106A</Generic>
+          <Generic>ACPI\INTC106B</Generic>
+          <Generic>ACPI\INTC106C</Generic>
+          <Generic>ACPI\INTC106D</Generic>
+          <Image type="DRVR" inftype="base" version="2.2.10204.7">
+            <file>17763\Drivers\x64\ipf_acpi.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="22621" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="110611">
+          <PCIInfo vendorID="8086" deviceID="461D" />
+          <PCIInfo vendorID="8086" deviceID="3258" />
+          <PCIInfo vendorID="8086" deviceID="A71D" />
+          <PCIInfo vendorID="8086" deviceID="7D03" />
+          <PCIInfo vendorID="8086" deviceID="AD03" />
+          <PCIInfo vendorID="8086" deviceID="641D" />
+          <Generic>SWC\VID8086_IPFEF_1.0</Generic>
+          <Image type="DRVR" inftype="base" version="2.2.10204.7">
+            <file>17763\Drivers\x64\ipf_cpu.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="22621" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="110611">
+          <PCIInfo vendorID="8086" deviceID="7F23" />
+          <Image type="DRVR" inftype="base" version="2.2.10204.7">
+            <file>17763\Drivers\x64\ipf_smbus.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="22621" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+      </DeviceGroup>
+    </content>
+  </packageinformation>
+</MUPDefinition>

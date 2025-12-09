@@ -1,0 +1,9 @@
+HsaComponent/iaStorHsaComponent.cat
+HsaComponent/iaStorHsaComponent.inf
+HsaExtension/iaStorHsa_Ext.cat
+HsaExtension/iaStorHsa_Ext.inf
+VMD/iaStorVD.cat
+VMD/iaStorVD.inf
+VMD/iaStorVD.sys
+VMD/RstMwEventLogMsg.dll
+VMD/RstMwService.exe

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>DUP Main Screen</title> <!-- this is not actually used, but the IDEs complain with no title -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta http-equiv="page-enter" content="blendTrans(Duration=.33)" />
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Modified styles for legacy IE systems -->
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="ielegacy.css" />
+    <![endif]-->
+
+    <script type="text/javascript" src="script.js"></script>
+    <!-- WARNING: only use exact px size units for OS DPI independant sizing (EVEN FONTS!) -->
+</head>
+
+<body style="height:466px">
+    <div id="header">
+        <label id="headLogo" style="margin-left:21px;">
+            <img src="logo.png" alt=" " />
+        </label>
+        <label id="headText" style="margin-left:23px;margin-right:450px">Update Package<!-- sample text --></label>
+        <label id="headCloser" class="closer">
+            <input type="button" class="closer" id="btnDupClose" title="Exit Update Package" href="#" />
+        </label>
+        <!--<button id="headCloser" title="Exit Update Package" class="closer"></button>-->
+    </div>
+
+    <div style="white-space:pre;height:20px;"></div>
+
+    <!-- package description -->
+    <div class="grid_bios">
+        <div class="title" style="max-height:63px; width:630px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis">
+            <span id="duptitle" style="max-width: 530px; display: inline-block; overflow: hidden" title="DUP Description">Update package name<!-- sample text --></span>
+            <label id="headCloser" class="title">
+                <input type="button" id="lnkDupInfo" title="Click here for more update package details" href="#" />
+            </label>
+        </div>
+        <label style="color: #7E7E7E">
+            <span id="dupversion">v1.1 (A02)<!-- sample text --></span>
+            <span id="dupdate">March 26th, 2010<!-- sample text --></span>
+        </label>
+    </div><!-- package description ends-->
+
+    <div style="white-space:pre;height:25px;"></div>
+
+    <!--Complete Summary for BIOS DUP-->
+    <div id="CompleteBanner" class="Banner BannerSuccessColor">
+        <label id="dupStatusIcon" style="margin-right:10px; float:left; position:relative; margin-top:4px;">
+            <input type="image" src="complete_success.png" alt=" " />
+        </label>
+        <label id="dupStatusSummary" style="float: left;">
+            <b>Success: </b> Your software is now updated.
+        </label>
+    </div>
+    <!-- Complete summary ends -->
+
+
+    <div style="white-space:pre;height:210px;"></div>
+
+    <!-- Buttons -->
+    <div class="grid_bios" style="display: flex;">
+        <button class="button primary_up" id="btnDupRetry" onmouseover="javascript:SetPrimaryHover('btnDupRetry');" onmouseout="javascript:SetPrimaryNormal('btnDupRetry');">
+            RETRY
+        </button>
+        <button class="button primary_up" id="btnDupRestart" onmouseover="javascript:SetPrimaryHover('btnDupRestart');" onmouseout="javascript:SetPrimaryNormal('btnDupRestart');">
+            RESTART
+        </button>
+        <button style="margin-left:15px" class="button secondary_up" id="btnDupFailClose" onmouseover="javascript:SetSecondaryHover('btnDupFailClose');" onmouseout="javascript:SetSecondaryNormal('btnDupFailClose');">
+            CLOSE
+        </button>
+        <button style="margin-right:130px" class="button primary_up" id="btnDupCloseComplete" onmouseover="javascript:SetPrimaryHover('btnDupCloseComplete');" onmouseout="javascript:SetPrimaryNormal('btnDupCloseComplete');">
+            EXIT
+        </button>
+        <label style="margin-left: auto; align-self: flex-end;">
+            <a id="btnDupLog" class="link" title="View the Update Package log file">View Installation Log</a>
+        </label>
+    </div>
+
+</body>
+
+</html>

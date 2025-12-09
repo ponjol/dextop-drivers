@@ -1,0 +1,64 @@
+﻿<HTML>
+<HEAD>
+<TITLE>setup.html</TITLE>
+<meta http-equiv="content-type" content="text-html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="format.css">
+</HEAD>
+
+<H3>Driver Installation</H3>
+To install the driver, proceed as follows 
+<ol>
+<li> Launch the executive file "setup.exe"
+<li> Follow the instructions displayed by the setup.exe program 
+</ol>
+<p> 
+<br>
+
+NOTE:
+<ul>
+<li>	On Plug and Play Windows platforms, the adapter will be identified and configured 
+        automatically. Please stop all the automatic installation by Windows system. 
+<li>	To install driver, you should have administrator's privilege.
+</ul>
+
+<P>
+<BR>
+
+<H3>Manual Installation </H3>
+Manual installation is to install driver by the installation file (INF) rather than use the "setup.exe" mentioned above. 
+To install driver manually, please open Device Manager, expand the Network adapters tree list,  select the 
+"Realtek RTL81XX Ethernet NIC", and click right button, execute the menu item Update driver..., and follow the direction
+to indicate the path of INF file. 
+<p> <br>
+NOTE：
+<ul>
+<li> Manual installation is a kind of method of installation by advanced  user. 
+Generic users please use the "setup.exe"  to install driver.
+</ul> <p> <br>
+
+<H3>Silent Installation</H3>
+The section describes the process to install driver without showing any dialog box on 
+user's screen and requiring user's attendance.
+If you need to install driver in silence, you may launch DOS prompt and execute 
+ <p> 
+Silent Installation
+<ul>
+<PRE>C:>%driver_path%\setup.exe /s
+</PRE>
+</ul>
+<BR>
+Silent Removal 
+<ul>
+<PRE>C:>%driver_path%\setup.exe /s /f1".\uninstall.iss"
+</PRE>
+</ul>
+
+<BR>
+
+<H3> Troubleshooting </H3>
+If you encounter any problems during the driver installation phase, please carefully 
+follow the instructions described in Installation section to install again. 
+If you still need assistance, please contact our technical support department.
+For more information, you may access to our web site.
+</BODY>
+</HTML>

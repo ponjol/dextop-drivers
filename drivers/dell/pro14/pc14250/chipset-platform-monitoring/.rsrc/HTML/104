@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>DUP Main Screen</title> <!-- this is not actually used, but the IDEs complain with no title -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta http-equiv="page-enter" content="blendTrans(Duration=.33)" />
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- Modified styles for legacy IE systems -->
+    <!--[if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="ielegacy.css" />
+    <![endif]-->
+
+    <script type="text/javascript" src="script.js"></script>
+    <!-- WARNING: only use exact px size units for OS DPI independant sizing (EVEN FONTS!) -->
+</head>
+
+<body>
+    <div id="header">
+        <div  style="height:10px"></div>
+        <label id="headLogoLPad"><!-- space --></label>
+        <label id="headLogo" style="margin-left:11px"><!-- space --> </label>
+        <label id="headText" style="margin-left:23px;margin-right:210px">Update Package<!-- sample text --></label>
+        <label id="headCloser" class="closer"><input type="button" class="closer" id="btnDupClose" title="Exit Update Package" href="#" /></label>
+        <!--<button id="headCloser" title="Exit Update Package" class="closer"></button>-->
+    </div>
+
+    <!-- package description -->
+    <div class="grid">
+        <label style="height:19px; width: 100%"><label><!-- place holder--></label></label>
+        <br>
+        <div class="title" style="max-height:63px; width:390px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis">
+            <span id="duptitle" style="width:390px;display:inline-block;overflow:hidden" title="DUP Description">Update package name<!-- sample text --></span>
+            <label id="headCloser" class="title" style="position:fixed"><input type="button" id="lnkDupInfo" title="View Update Details" href="#" /></label>
+        </div>
+
+        <label>
+            <span id="dupversion">v1.1 (A02)<!-- sample text --></span>
+            <span id="dupdate">March 26th, 2010<!-- sample text --></span>
+        </label>
+        <div style="white-space:pre;height:10px;"></div>
+        <hr class="separator">
+    </div><!-- package description ends-->
+    <!-- User choice of install/extract -->
+    <div class="grid">
+        <label style="height:14px; width: 100%;"><label><!-- place holder--></label></label>
+        <label class="info" id="installInfo" style="margin-right:80px">Extract and install contents of software update</label> <!-- space -->
+        <button style="margin-top:8px" class="button primary_up" id="btnDupInstall" onmouseover="javascript: SetPrimaryHover('btnDupInstall');" onmouseout="javascript: SetPrimaryNormal('btnDupInstall');">
+            <a id="btnDupInstallText">INSTALL</a>
+        </button>
+        <div style="white-space:pre;height:10px;"></div>
+        <label style="height:8px; width: 100%;"><label><!-- place holder--></label></label>
+        <label class="lastinfo" id="extractInfo" style="margin-right:122px">Only extract contents of software update</label><!-- space -->
+        <button class="button secondary_up" id="btnDupExtract" onmouseover="javascript:SetSecondaryHover('btnDupExtract');" onmouseout="javascript:SetSecondaryNormal('btnDupExtract');">
+            <a id="btnDupExtractText">EXTRACT</a>
+        </button>
+    </div>
+
+    <!-- copyright information -->
+    <div id="footer">
+        <br>
+        <p id="footertext">© 2009 - 2024 Dell Inc.or its subsidiaries. All rights reserved.<!-- sample text --></p>
+    </div>
+</body>
+
+</html>

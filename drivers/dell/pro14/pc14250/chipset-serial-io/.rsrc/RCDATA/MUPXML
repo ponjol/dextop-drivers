@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MUPDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.dell.com/openmanage/cm/2/0/mupdefinition.xsd">
+  <packageinformation>
+    <installertype>mupinstaller</installertype>
+    <mupspecificationversion>3.0.0</mupspecificationversion>
+    <name>Intel Serial IO Driver</name>
+    <packagegrouping>dch_package</packagegrouping>
+    <packagingtype>dch_inf_package</packagingtype>
+    <releasetype>DRVR</releasetype>
+    <subsystem>Chipset</subsystem>
+    <version>30.100.2418.12</version>
+    <AppliesTo>
+      <DeviceInformation>Intel Serial IO</DeviceInformation>
+    </AppliesTo>
+    <supportedoperatingsystems>
+      <osidentifier name="Windows10" architecture="x64" />
+    </supportedoperatingsystems>
+    <content dchSupport="true" baseOSBuildNumber="17763">
+      <DeviceGroup supportedOSBuildNumber="17763">
+        <Device componentID="103954">
+          <Generic>ACPI\INTC1056</Generic>
+          <Generic>ACPI\INTC1055</Generic>
+          <Generic>ACPI\INTC1085</Generic>
+          <Image type="DRVR" inftype="base" version="30.100.2417.30">
+            <file>17763\Drivers\x64\iaLPSS2_GPIO2_ADL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <Generic>ACPI\INTC105F</Generic>
+          <Image type="DRVR" inftype="base" version="30.100.2416.40">
+            <file>17763\Drivers\x64\iaLPSS2_GPIO2_LNL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <Generic>ACPI\INTC1083</Generic>
+          <Generic>ACPI\INTC105E</Generic>
+          <Image type="DRVR" inftype="base" version="30.100.2418.12">
+            <file>17763\Drivers\x64\iaLPSS2_GPIO2_MTL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="7ACC" />
+          <PCIInfo vendorID="8086" deviceID="7ACD" />
+          <PCIInfo vendorID="8086" deviceID="7ACE" />
+          <PCIInfo vendorID="8086" deviceID="7ACF" />
+          <PCIInfo vendorID="8086" deviceID="7AFC" />
+          <PCIInfo vendorID="8086" deviceID="7AFD" />
+          <PCIInfo vendorID="8086" deviceID="51E8" />
+          <PCIInfo vendorID="8086" deviceID="51E9" />
+          <PCIInfo vendorID="8086" deviceID="51EA" />
+          <PCIInfo vendorID="8086" deviceID="51EB" />
+          <PCIInfo vendorID="8086" deviceID="51C5" />
+          <PCIInfo vendorID="8086" deviceID="51C6" />
+          <PCIInfo vendorID="8086" deviceID="51D8" />
+          <PCIInfo vendorID="8086" deviceID="51D9" />
+          <PCIInfo vendorID="8086" deviceID="7A4C" />
+          <PCIInfo vendorID="8086" deviceID="7A4D" />
+          <PCIInfo vendorID="8086" deviceID="7A4E" />
+          <PCIInfo vendorID="8086" deviceID="7A4F" />
+          <PCIInfo vendorID="8086" deviceID="7A7C" />
+          <PCIInfo vendorID="8086" deviceID="7A7D" />
+          <Image type="DRVR" inftype="base" version="30.100.2417.30">
+            <file>17763\Drivers\x64\iaLPSS2_I2C_ADL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="A878" />
+          <PCIInfo vendorID="8086" deviceID="A879" />
+          <PCIInfo vendorID="8086" deviceID="A87A" />
+          <PCIInfo vendorID="8086" deviceID="A87B" />
+          <PCIInfo vendorID="8086" deviceID="A850" />
+          <PCIInfo vendorID="8086" deviceID="A851" />
+          <Image type="DRVR" inftype="base" version="30.100.2416.40">
+            <file>17763\Drivers\x64\iaLPSS2_I2C_LNL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="7E78" />
+          <PCIInfo vendorID="8086" deviceID="7E79" />
+          <PCIInfo vendorID="8086" deviceID="7E7A" />
+          <PCIInfo vendorID="8086" deviceID="7E7B" />
+          <PCIInfo vendorID="8086" deviceID="7E50" />
+          <PCIInfo vendorID="8086" deviceID="7E51" />
+          <PCIInfo vendorID="8086" deviceID="7778" />
+          <PCIInfo vendorID="8086" deviceID="7779" />
+          <PCIInfo vendorID="8086" deviceID="777A" />
+          <PCIInfo vendorID="8086" deviceID="777B" />
+          <PCIInfo vendorID="8086" deviceID="7750" />
+          <PCIInfo vendorID="8086" deviceID="7751" />
+          <Image type="DRVR" inftype="base" version="30.100.2418.12">
+            <file>17763\Drivers\x64\iaLPSS2_I2C_MTL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="A87C" />
+          <PCIInfo vendorID="8086" deviceID="A877" />
+          <Image type="DRVR" inftype="base" version="30.100.2416.40">
+            <file>17763\Drivers\x64\iaLPSS2_I3C_LNL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="7E7C" />
+          <PCIInfo vendorID="8086" deviceID="777C" />
+          <Image type="DRVR" inftype="base" version="30.100.2418.12">
+            <file>17763\Drivers\x64\iaLPSS2_I3C_MTL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="7AAA" />
+          <PCIInfo vendorID="8086" deviceID="7AAB" />
+          <PCIInfo vendorID="8086" deviceID="7AFB" />
+          <PCIInfo vendorID="8086" deviceID="7AF9" />
+          <PCIInfo vendorID="8086" deviceID="51AA" />
+          <PCIInfo vendorID="8086" deviceID="51AB" />
+          <PCIInfo vendorID="8086" deviceID="51FB" />
+          <PCIInfo vendorID="8086" deviceID="51FD" />
+          <PCIInfo vendorID="8086" deviceID="51FE" />
+          <PCIInfo vendorID="8086" deviceID="51DE" />
+          <PCIInfo vendorID="8086" deviceID="51DF" />
+          <PCIInfo vendorID="8086" deviceID="7A2A" />
+          <PCIInfo vendorID="8086" deviceID="7A2B" />
+          <PCIInfo vendorID="8086" deviceID="7A7B" />
+          <PCIInfo vendorID="8086" deviceID="7A79" />
+          <Image type="DRVR" inftype="base" version="30.100.2417.30">
+            <file>17763\Drivers\x64\iaLPSS2_SPI_ADL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="A827" />
+          <PCIInfo vendorID="8086" deviceID="A830" />
+          <PCIInfo vendorID="8086" deviceID="A846" />
+          <Image type="DRVR" inftype="base" version="30.100.2416.40">
+            <file>17763\Drivers\x64\iaLPSS2_SPI_LNL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="7E27" />
+          <PCIInfo vendorID="8086" deviceID="7E30" />
+          <PCIInfo vendorID="8086" deviceID="7E98" />
+          <PCIInfo vendorID="8086" deviceID="7727" />
+          <PCIInfo vendorID="8086" deviceID="7730" />
+          <PCIInfo vendorID="8086" deviceID="7746" />
+          <Image type="DRVR" inftype="base" version="30.100.2418.12">
+            <file>17763\Drivers\x64\iaLPSS2_SPI_MTL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="7AA8" />
+          <PCIInfo vendorID="8086" deviceID="7AA9" />
+          <PCIInfo vendorID="8086" deviceID="7AFE" />
+          <PCIInfo vendorID="8086" deviceID="7ADC" />
+          <PCIInfo vendorID="8086" deviceID="51A8" />
+          <PCIInfo vendorID="8086" deviceID="51A9" />
+          <PCIInfo vendorID="8086" deviceID="51C7" />
+          <PCIInfo vendorID="8086" deviceID="51DA" />
+          <PCIInfo vendorID="8086" deviceID="51DB" />
+          <PCIInfo vendorID="8086" deviceID="51DC" />
+          <PCIInfo vendorID="8086" deviceID="51DD" />
+          <PCIInfo vendorID="8086" deviceID="7A28" />
+          <PCIInfo vendorID="8086" deviceID="7A29" />
+          <PCIInfo vendorID="8086" deviceID="7A7E" />
+          <PCIInfo vendorID="8086" deviceID="7A5C" />
+          <Image type="DRVR" inftype="base" version="30.100.2417.30">
+            <file>17763\Drivers\x64\iaLPSS2_UART2_ADL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="A825" />
+          <PCIInfo vendorID="8086" deviceID="A826" />
+          <PCIInfo vendorID="8086" deviceID="A852" />
+          <Image type="DRVR" inftype="base" version="30.100.2416.40">
+            <file>17763\Drivers\x64\iaLPSS2_UART2_LNL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+        <Device componentID="103954">
+          <PCIInfo vendorID="8086" deviceID="7E25" />
+          <PCIInfo vendorID="8086" deviceID="7E26" />
+          <PCIInfo vendorID="8086" deviceID="7E52" />
+          <PCIInfo vendorID="8086" deviceID="7725" />
+          <PCIInfo vendorID="8086" deviceID="7726" />
+          <PCIInfo vendorID="8086" deviceID="7752" />
+          <Image type="DRVR" inftype="base" version="30.100.2418.12">
+            <file>17763\Drivers\x64\iaLPSS2_UART2_MTL.inf</file>
+            <supportedoperatingsystems>
+              <osidentifier name="Windows10.0" architecture="x64" buildNumber="17763" />
+            </supportedoperatingsystems>
+          </Image>
+        </Device>
+      </DeviceGroup>
+    </content>
+  </packageinformation>
+</MUPDefinition>

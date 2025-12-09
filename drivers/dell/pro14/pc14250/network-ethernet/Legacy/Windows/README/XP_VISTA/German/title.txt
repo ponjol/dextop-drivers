@@ -1,0 +1,1 @@
+﻿GER: "Bedienungsanleitung für Realtek Netzwerkadapter der Serie RTL81XX" 

@@ -1,0 +1,5 @@
+For : 8169/8168/8101E (NDIS 6.20)
+
+Windows 8 Lan Driver Version (NDIS 6.30) : 8.012
+
+

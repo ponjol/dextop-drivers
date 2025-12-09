@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dupmupmapping schemaVersion="3.0" xsi:schemaLocation="http://schemas.dell.com/openmanage/cm/2009/1/0/mupdefinition.xsd mupdefinition.xsd" xmlns="http://schemas.dell.com/openmanage/cm/2009/1/0/mupdefinition.xsd" xmlns:dm="http://schemas.dell.com/openmanage/cm/2009/1/1/datamodelcore.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <behaviors>
+    <behavior name="attended" capabilitybit="16" support="mandatory">
+      <!-- the default behavior. -->
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">f</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+    </behavior>
+    <behavior name="help"> <!-- Writes help information to standard out. -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">l</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">f</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+    </behavior>
+    <behavior name="help alternate"> <!-- Writes help information to standard out. (aleternate form) -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">l</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">f</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+    </behavior>
+		<behavior name="unattended" capabilitybit="17" support="conditional"> <!-- Run without user interaction. -->
+			<DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+			<DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+			<DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">i</DellOption>
+		</behavior>
+    <behavior name="freshinstall" capabilitybit="25" support="conditional">
+      <!-- Fresh install of the package -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">i</DellOption>
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">f</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+    </behavior>
+    <behavior name="extractall" capabilitybit="19" support="mandatory"> <!-- Extract the package contents to the specified directory -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">f</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+    </behavior>
+		<behavior name="extractdrivers" capabilitybit="22" support="conditional"> <!-- Extract only the drivers to the specified directory -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">f</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+		</behavior>
+    <behavior name="driveronly" capabilitybit="23" support="conditional"> <!-- Install only the drivers in a driver package -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+    </behavior>
+    <behavior name="apponly" capabilitybit="24" support="conditional"> <!-- Install only the application from a driver and application package.-->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">apponly</DellOption>
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">?</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">h</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">e</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="true" valuedelimiter="=">drivers</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">driveronly</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">passthrough</DellOption>
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">factoryinstallpassthrough</DellOption>      
+      <DellOption requirement="excluded" switch="/" requiresvalue="false">bls</DellOption>
+    </behavior>
+    <behavior name="passthrough" capabilitybit="18" support="mandatory"> <!-- Pass the command line to the contained package without processing the input parameters. -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">passthrough</DellOption>
+    </behavior>
+    <behavior name="factoryinstallpassthrough" capabilitybit="18" support="mandatory">
+      <!-- Pass the command line to the contained package without processing the input parameters. If the vendor installer returns REBOOT_REQUIRED or REBOOT_UPDATE_PENDING, turn it to SUCCESS-->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">factoryinstall /passthrough</DellOption>
+    </behavior>    
+	</behaviors>
+	<parameters>
+		<parametermapping name="logfile" capabilitybit="20" support="mandatory"> <!-- Specify the path to the desired log file. -->
+			<DellOption requirement="mandatory" switch="/" requiresvalue="true" valuedelimiter="=">l</DellOption>
+		</parametermapping>
+		<parametermapping name="force" capabilitybit="21" support="conditional"> <!-- Override soft update or install errors. -->
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+			<DellOption requirement="mandatory" switch="/" requiresvalue="false">f</DellOption>
+		</parametermapping>
+    <parametermapping name="bitlockersuspend" capabilitybit="26" support="mandatory">
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">s</DellOption>
+      <DellOption requirement="mandatory" switch="/" requiresvalue="false">bls</DellOption>
+    </parametermapping>
+	</parameters>
+	<returncodes>
+		<returncodemapping name="SUCCESS" category="SUCCESS">
+			<TargetReturnCode>0</TargetReturnCode> <!-- This value shall be returned if the software installation completed successfully and a reboot is not required. -->
+		</returncodemapping>
+		<returncodemapping name="ERROR" category="ERROR">
+			<TargetReturnCode>1</TargetReturnCode> <!-- This value shall be returned if the installation failed and none of the other exit codes are more applicable. -->
+		</returncodemapping>
+		<returncodemapping name="REBOOT_REQUIRED" category="REBOOT">
+			<TargetReturnCode>2</TargetReturnCode> <!-- This value shall be returned if the software installation completed successfully, however a reboot is required for it to take effect. -->
+		</returncodemapping>
+		<returncodemapping name="DEP_SOFT_ERROR" category="ERROR">
+			<TargetReturnCode>3</TargetReturnCode> <!-- An error occurred that may be overridden using the force option. -->
+		</returncodemapping>
+		<returncodemapping name="DEP_HARD_ERROR" category="ERROR">
+			<TargetReturnCode>4</TargetReturnCode> <!-- An error occurred that may be corrected through applying an additional update to the target system. -->
+		</returncodemapping>
+		<returncodemapping name="PLATFORM_UNSUPPORTED" category="ERROR">
+			<TargetReturnCode>5</TargetReturnCode> <!-- The DUP is incompatible with the target system, due to missing hardware, OS incompatibility, or another uncorrectable issue. -->
+		</returncodemapping>
+    <returncodemapping name="ERROR_INSTALL_PLATFORM_UNSUPPORTED" category="ERROR">
+      <TargetReturnCode>5</TargetReturnCode> <!-- The DUP is incompatible with the target system, due to missing hardware, OS incompatibility, or another uncorrectable issue. -->
+    </returncodemapping>
+    <returncodemapping name="REBOOTING_SYSTEM" category="REBOOT">
+			<TargetReturnCode>6</TargetReturnCode> <!-- The software installation initiated a reboot. -->
+		</returncodemapping>
+		<returncodemapping name="PASSWORD_REQUIRED" category="ERROR">
+			<TargetReturnCode>7</TargetReturnCode> <!-- A device specific password is required. -->
+		</returncodemapping>
+		<returncodemapping name="NO_DOWNGRADE" category="ERROR">
+			<TargetReturnCode>8</TargetReturnCode> <!-- This value shall be returned if the version of the software being installed is lower than or the same as the version already installed on the system and executing a downgrade via the force option is not supported by the package. -->
+		</returncodemapping>
+		<returncodemapping name="REBOOT_UPDATE_PENDING" category="REBOOT">
+			<TargetReturnCode>9</TargetReturnCode> <!-- This value shall be returned if the software installation will continue after a reboot. -->
+		</returncodemapping>
+    <returncodemapping name="INVALID_CMDLINE_SPEC" category="ERROR">
+      <TargetReturnCode>10</TargetReturnCode> <!-- There is a problem with the command line input. Doesn't meet specification for parsing correctly, or the combinations are mutually exclusive -->
+    </returncodemapping>
+    <returncodemapping name="UNKNOWN_OPTION" category="ERROR">
+      <TargetReturnCode>11</TargetReturnCode> <!-- One or more of the parameters specified on the command line are recognized as valid, but are unsupported by this specific DUP. -->
+    </returncodemapping>
+    <returncodemapping name="AUTHORIZATION_LEVEL" category="ERROR">
+      <TargetReturnCode>12</TargetReturnCode> <!-- This value shall be returned if the package was not executed in a user context with sufficient OS privileges. -->
+    </returncodemapping>
+    <returncodemapping name="BITLOCKER_ERROR" category="ERROR">
+      <TargetReturnCode>13</TargetReturnCode> <!-- This value shall be returned if the Bitlocker operation is in progress or suspension failed during update operation. -->
+    </returncodemapping>
+	</returncodes>
+  <helpmapping>
+    <help name="attended">
+      <title>(none)</title>
+      <description>Display of graphical user interface for guided installation/update or extraction.</description>
+      <note></note>
+      <example></example>
+    </help>
+    <help name="help">
+      <title>/? or /h</title>
+      <description>Displays this  Update Package usage information.</description>
+      <note></note>
+      <example></example>
+    </help>
+    <help name="unattended">
+      <title>/s</title>
+      <description>Suppresses all graphical user interfaces of the  Update Package.</description>
+      <note></note>
+      <example>Update the system silently
+$exe$ /s</example>
+    </help>
+    <help name="freshinstall">
+      <title>/i</title>
+      <description>Does a fresh install of the Update Package.</description>
+      <note>Requires /s option</note>
+      <example>Fresh install silently 
+$exe$ /s /i
+      </example>
+    </help>
+    <help name="extractall">
+      <title>/e=&lt;path&gt;</title>
+      <description>Extraction of update contents to a folder.</description>
+      <note>Requires /s option</note>
+      <example>Extract the update contents to the folder C:\mydir\
+$exe$ /s /e=C:\mydir</example>
+    </help>
+    <help name="logfile">
+      <title>/l=&lt;path&gt;</title>
+      <description>Define a specific path for the  Update Package log file.</description>
+      <note>This option can NOT be used in combination with /passthrough</note>
+      <example>Change from the default log location to C:\my path with spaces\log.txt
+$exe$ /l=&quot;C:\my path with spaces\log.txt&quot;</example>
+    </help>
+    <help name="force">
+      <title>/f</title>
+      <description>Override a soft dependency error returned from the  Update Package.</description>
+      <note>Requires /s option, can NOT be used in combination with /passthrough</note>
+      <example>Force update to continue, even on &quot;soft&quot; qualification errors
+$exe$ /s /f</example>
+    </help>
+    <help name="bitlockersuspend">
+      <title>/bls</title>
+      <description>Suspends the BitLocker during BIOS Update.</description>
+      <note>Requires /s option</note>
+      <example>
+        $exe$ /s /bls
+      </example>
+    </help>
+    <help name="extractdrivers">
+      <title>/drivers=&lt;path&gt;</title>
+      <description>Extraction of only driver components to a folder.</description>
+      <note>Requires /s option</note>
+      <example>Extract the driver components to the folder C:\mydir\
+$exe$ /s /drivers=C:\mydir</example>
+    </help>
+    <help name="apponly">
+      <title>/apponly</title>
+      <description>Installation/Update of the application components only.</description>
+      <note>Requires /s option</note>
+      <example>Only install application components
+$exe$ /s /apponly</example>
+    </help>
+    <help name="driveronly">
+      <title>/driveronly</title>
+      <description>Installation/Update of the driver components only.</description>
+      <note>Requires /s option</note>
+      <example>Only install driver components
+$exe$ /s /driveronly</example>
+    </help>
+    <help name="passthrough">
+      <title>/passthrough ...</title>
+      <description>(Advanced) Sends all text following the /passthrough option directly to the vendor install software of the  Update Package. This mode suppresses any  provided graphical user interfaces, but not necessarily those of the vendor software.</description>
+      <note></note>
+      <example></example>
+    </help>
+    <help name="factoryinstallpassthrough">
+      <title>/factoryinstall /passthrough (vendor command line parameter)</title>
+      <description>(Advanced) (commnad line parameters) will be passed to vendor installer directly without parsing MUP.xml. Post installation, If the vendor installer returns REBOOT_REQUIRED or REBOOT_UPDATE_PENDING, it will be turned to SUCCESS.</description>
+      <note></note>
+      <example>Pass command line arguments directly to vendor installer. 
+Turn the return code to success if required
+$exe$ /factoryinstall /passthrough D:\Sample.xml C:\log\FI.log
+      </example>
+    </help>   
+  </helpmapping>
+</dupmupmapping>

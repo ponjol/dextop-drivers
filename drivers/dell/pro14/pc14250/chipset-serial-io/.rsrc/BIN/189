@@ -1,0 +1,648 @@
+﻿<# 
+
+NAME    : Appx-Package Installer
+Version : 0.1
+Usage   : ./AppPackageInstaller.ps1 -LogFolder "Folder-Path" -AppName "Appx-Name" -MainAppx "Complete path of Main Appx-Package" -AppxLicense "Complete path of Appx-Package License File" -DependencyAppx "Complete path of Dependency Appx-Package, pass multiple Dependency Appx-Package Separated by comma (,)."   
+    
+    Appx-Package Installer Script accepts parameters,
+                   
+                   Mandatory Arguments : LogFolder-path, AppName, Main Appx-Package
+                   
+                   Optional Argument   : Appx-Package license, Dependency Appx-Packages
+
+
+#>
+
+[CmdletBinding()]
+Param(
+    
+   [Parameter(Position=1)]
+    $LogFolder,
+
+   [Parameter(Position=2)]
+    $AppName,
+
+   [Parameter(Position=3)]
+    $MainAppx,
+
+   [Parameter(Position=4)]
+    $AppxLicense,
+
+   [Parameter(Position=5)]
+    $DependencyAppx
+
+)
+
+
+# Exit Codes for Appx-Installer: Global Variable. 
+
+[int]$Global:ExitCodeSuccess = 0    # Success.
+[int]$Global:ExitCodeError   = 1    # Error with error message.
+[int]$Global:ExitLogFolderError   = 2    # Error Log-Folder Path not found or invalid path passed.
+
+
+# Logging for Appx-Installer.
+
+$LogFileName = "\Appx_Installer.txt"                                 # Log-File Name                                   
+$Global:LogFilePath = -join($LogFolder,$LogFileName)                 # Log-File Path: Global Variable.
+
+
+if ((-not [string]::IsNullOrEmpty($LogFolder)))
+{
+    If(!(Test-Path -Path $LogFolder))
+    {
+        Write-Host "LogFolder location is invalid." `n -BackgroundColor Red
+        exit $ExitLogFolderError
+    }
+    else
+    {
+        try {
+                New-Item -ItemType File -Path $LogFilePath -Force
+        }
+        catch {
+                Write-Host "Error Creating Log-File." `n -BackgroundColor Red
+                exit $ExitLogFolderError
+        }
+    }
+}
+else
+{
+    Write-Host "Mandatory Argument: Log-Folder path not passed." `n -BackgroundColor Red
+    exit $ExitLogFolderError
+}
+
+
+# Function to get time-stamp for Logging.
+
+function Get-TimeStamp {
+    
+    return "[{0:MM/dd/yy} {0:HH:mm:ss}]" -f (Get-Date)
+    
+}
+
+
+# Starting Appx-Logging.
+
+Add-Content -Path $LogFilePath -Value "   ***   Appx-Package Installation Log   ***   "
+
+
+# Function to Validate Parameters Passed.
+
+function ValidParameter($Parameter,$ParameterName) {
+    
+    if (([string]::IsNullOrEmpty($Parameter)))
+    {
+        Write-Host "Manadatory Argument: $ParameterName not passed. " -BackgroundColor Red `n
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Manadatory Argument: $ParameterName not passed."
+        exit $ExitCodeError
+    }
+
+}
+
+# Function to Test File for it's Existence. 
+
+function ValidFile($TestFile,$FileName) {
+    
+    If(!(Test-Path -Path $TestFile))
+    {
+        Write-Host "$FileName NOT FOUND."  -BackgroundColor Red `n
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   $FileName NOT FOUND."
+        exit $ExitCodeError
+    }
+}
+
+
+# Function to Install Appx-Package (Provisionig Appx-Package: By default available for all the users.)
+
+    # 1. Installation of Appx-Package with License-File and Dependency Appx-Packages.
+
+function InstallAppx($Appx,$License,$AppxDependency) {
+    try{
+        Add-AppxProvisionedPackage -Online -PackagePath $Appx -DependencyPackagePath $AppxDependency -LicensePath $License
+    
+		Write-Host "command invoked : "-PackagePath $Appx -DependencyPackagePath $AppxDependency -LicensePath $License
+
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   PowerShell Command to Install/Provision Appx-Package: Add-AppxProvisionedPackage -Online -PackagePath $Appx -DependencyPackagePath $AppxDependency -LicensePath $License"
+
+        if ( !$? )
+        {
+
+            Write-Host "Error Installing Appx-Package:" + $Error[0].Exception.Message -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+    
+        }
+        else
+        {
+    
+            Write-Host "Appx-Package Installed Successfully." -BackgroundColor Green `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Appx-Package Installed Successfully."
+            exit $ExitCodeSuccess
+        }
+	}
+	catch{
+		Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+        exit $ExitCodeError
+	}
+}
+    
+
+    # 2. Installation of Appx-Package with only License-File.
+
+function InstallAppxWithLicense($Appx,$License) {
+    try{
+        Add-AppxProvisionedPackage -Online -PackagePath $Appx -LicensePath $License
+
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   PowerShell Command to Install/Provision Appx-Package: Add-AppxProvisionedPackage -Online -PackagePath $Appx -LicensePath $License"
+
+        if ( !$? )
+        {
+
+            Write-Host "Error Installing Appx-Package:" + $Error[0].Exception.Message -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+    
+        }
+        else
+        {
+    
+            Write-Host "Appx-Package Installed Successfully." -BackgroundColor Green `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Appx-Package Installed Successfully."
+            exit $ExitCodeSuccess
+        }
+	}
+	catch{
+		Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+		exit $ExitCodeError
+	}
+}
+
+
+    # 3. Installation of Appx-Package with only Dependency Appx-Packages.
+
+function InstallAppxWithDependencyAppx($Appx,$AppxDependency) {
+    try{
+        Add-AppxProvisionedPackage -Online -PackagePath $Appx -DependencyPackagePath $AppxDependency -SkipLicense
+
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   PowerShell Command to Install/Provision Appx-Package: Add-AppxProvisionedPackage -Online -PackagePath $Appx -DependencyPackagePath $AppxDependency -SkipLicense"
+
+        if ( !$? )
+        {
+
+            Write-Host "Error Installing Appx-Package:" + $Error[0].Exception.Message -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+    
+        }
+        else
+        {
+    
+            Write-Host "Appx-Package Installed Successfully." -BackgroundColor Green `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Appx-Package Installed Successfully."
+            exit $ExitCodeSuccess
+        }
+	}
+	catch{
+		Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+        exit $ExitCodeError
+	}
+}
+
+
+    # 4. Installation of Appx-Package only.
+
+function InstallAppxDefault($Appx) {
+    try{
+        Add-AppxProvisionedPackage -Online -PackagePath $Appx -SkipLicense
+
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   PowerShell Command to Install/Provision Appx-Package: Add-AppxProvisionedPackage -Online -PackagePath $Appx -SkipLicense"
+
+        if ( !$? )
+        {
+
+            Write-Host "Error Installing Appx-Package:" + $Error[0].Exception.Message -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+    
+        }
+        else
+        {
+    
+            Write-Host "Appx-Package Installed Successfully." -BackgroundColor Green `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Appx-Package Installed Successfully."
+            exit $ExitCodeSuccess
+        }
+	}
+	catch{
+		Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+        exit $ExitCodeError
+	}
+}
+
+
+<# 
+    Function to check if the Appx-Package already installed on the system, 
+                if installed the Appx-Package is De-Provisioned before Installing the New Package.
+#>
+
+
+function CheckAppx_Unistall($AppxPackageName) {
+    try{
+		Write-Host $AppxPackageName
+    $Appx_provisioned_Package = (Get-AppxProvisionedPackage -Online | where DisplayName –eq $AppxPackageName).PackageName
+
+    Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   PowerShell Command to Fetch the Appx-Provisioned Package Name: (Get-AppxProvisionedPackage -Online | where DisplayName –eq $AppxPackageName).PackageName"
+
+    if ((-not [string]::IsNullOrEmpty($Appx_provisioned_Package)))
+    {
+        
+        Remove-AppxProvisionedPackage -Online -PackageName $Appx_provisioned_Package
+
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   PowerShell Command to De-Provision Appx-Package: Remove-AppxProvisionedPackage -Online -PackageName $Appx_provisioned_Package"
+
+        if ( !$? )
+        {
+
+            Write-Host "Error De-Provisioning existing Appx-Package:" + $Error[0].Exception.Message -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error De-Provisioning existing Appx-Package: $Error[0].Exception.Message"
+            exit $ExitCodeError
+    
+        }
+        else
+        {
+    
+            Write-Host "Existing Appx-Package De-Provisioned Successfully." -BackgroundColor Green `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Existing Appx-Package De-Provisioned Successfully." 
+            
+        }
+
+    }
+
+    else
+    {
+
+        Write-Host "Appx-Package not Installed/Provisioned, Proceeding with Appx-Package Installation/Provisioning." `n
+        Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Appx-Package not Installed/Provisioned, Proceeding with Appx-Package Installation/Provisioning." 
+    }
+	}
+	catch{
+			Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+	}    
+}
+
+# Function to split Dependency Appx-Packages path and check if each path is valid or not.
+
+function SplitDependencyAppx($DSplit) {
+    try{	
+    $DependencyPackageArray = $DSplit.Split(',') 
+    
+    foreach ($D_Array_Ele in $DependencyPackageArray) 
+    { 
+     
+      ValidFile $D_Array_Ele 'Dependency Appx-Package'
+
+    }
+	}
+	catch{
+			Write-Host "Error splitting Appx-Package:" + $_ -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+	}	
+}
+
+
+# Main Script Block.
+
+
+if( ( -not [string]::IsNullOrEmpty( $DependencyAppx ) ) -and ( -not [string]::IsNullOrEmpty( $AppxLicense ) ) )   # Check if License and Dependency Appx-Packages are passed.
+{
+	try{
+   # Validate if all mandatory parameters are passed.
+   
+   ValidParameter $AppName 'Appx-Package Name'     
+   ValidParameter $MainAppx 'Main Appx-Package'
+   
+   # Validate if the file is present.
+
+   ValidFile $MainAppx 'Main Appx-Package'
+   ValidFile $AppxLicense 'Appx License'
+
+   SplitDependencyAppx $DependencyAppx  # Split the Dependency Appx-Packages passed and check if all the file is present.
+
+   CheckAppx_Unistall $AppName          # Check if Appx-Package is already present, if present Remove-AppxProvisionedPackage.
+
+   InstallAppx $MainAppx $AppxLicense $DependencyAppx  # Install or Add-AppxProvisionedPackage.
+	}
+	catch{
+			Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+	}
+}
+elseif ( ( [string]::IsNullOrEmpty( $DependencyAppx ) ) -and ( -not [string]::IsNullOrEmpty( $AppxLicense ) ) )
+{
+    try{
+   # Validate if all mandatory parameters are passed.
+   
+   ValidParameter $AppName 'Appx-Package Name'     
+   ValidParameter $MainAppx 'Main Appx-Package'
+   
+   # Validate if the file is present.
+
+   ValidFile $MainAppx 'Main Appx-Package'
+   ValidFile $AppxLicense 'Appx License'
+
+   CheckAppx_Unistall $AppName                     # Check if Appx-Package is already present, if present Remove-AppxProvisionedPackage.
+   
+   InstallAppxWithLicense $MainAppx $AppxLicense   # Install or Add-AppxProvisionedPackage. 
+	}
+	catch{
+			Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+	}
+}
+elseif ( ( -not [string]::IsNullOrEmpty( $DependencyAppx ) ) -and ( [string]::IsNullOrEmpty( $AppxLicense ) ) )
+{
+	try{
+   # Validate if all mandatory parameters are passed.
+   
+   ValidParameter $AppName 'Appx-Package Name'     
+   ValidParameter $MainAppx 'Main Appx-Package'
+   
+   # Validate if the file is present.
+
+   ValidFile $MainAppx 'Main Appx-Package'
+   
+   SplitDependencyAppx $DependencyAppx  # Split the Dependency Appx-Packages passed and check if all the file is present.
+
+   CheckAppx_Unistall $AppName          # Check if Appx-Package is already present, if present Remove-AppxProvisionedPackage.
+
+   InstallAppxWithDependencyAppx $MainAppx $DependencyAppx  # Install or Add-AppxProvisionedPackage.    
+	}
+	catch{
+			Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+	}
+}
+else
+{
+	try{
+   # Validate if all the parameters are passed.
+   
+   ValidParameter $AppName 'Appx-Package Name'
+   ValidParameter $MainAppx 'Main Appx-Package'
+
+   # Validate if the file is present.
+
+   ValidFile $MainAppx 'Main Appx-Package'
+   
+   CheckAppx_Unistall $AppName          # Check if Appx-Package is already present, if present Remove-AppxProvisionedPackage.
+
+   InstallAppxDefault $MainAppx         # Install or Add-AppxProvisionedPackage.       
+	}
+	catch{
+			Write-Host "Error Installing Appx-Package:" + $_ -BackgroundColor Red `n
+            Add-Content -Path $LogFilePath -Value "$(Get-TimeStamp)   Error Installing Appx-Package: $Error[0].Exception.Message "
+            exit $ExitCodeError
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+# SIG # Begin signature block
+# MIIo1wYJKoZIhvcNAQcCoIIoyDCCKMQCAQExDzANBglghkgBZQMEAgEFADB5Bgor
+# BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCAthCyA1xhFQa8O
+# jFiKjy76BVnLw4UDrS48LtX2Ly9awaCCDh8wggawMIIEmKADAgECAhAIrUCyYNKc
+# TJ9ezam9k67ZMA0GCSqGSIb3DQEBDAUAMGIxCzAJBgNVBAYTAlVTMRUwEwYDVQQK
+# EwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xITAfBgNV
+# BAMTGERpZ2lDZXJ0IFRydXN0ZWQgUm9vdCBHNDAeFw0yMTA0MjkwMDAwMDBaFw0z
+# NjA0MjgyMzU5NTlaMGkxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwg
+# SW5jLjFBMD8GA1UEAxM4RGlnaUNlcnQgVHJ1c3RlZCBHNCBDb2RlIFNpZ25pbmcg
+# UlNBNDA5NiBTSEEzODQgMjAyMSBDQTEwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAw
+# ggIKAoICAQDVtC9C0CiteLdd1TlZG7GIQvUzjOs9gZdwxbvEhSYwn6SOaNhc9es0
+# JAfhS0/TeEP0F9ce2vnS1WcaUk8OoVf8iJnBkcyBAz5NcCRks43iCH00fUyAVxJr
+# Q5qZ8sU7H/Lvy0daE6ZMswEgJfMQ04uy+wjwiuCdCcBlp/qYgEk1hz1RGeiQIXhF
+# LqGfLOEYwhrMxe6TSXBCMo/7xuoc82VokaJNTIIRSFJo3hC9FFdd6BgTZcV/sk+F
+# LEikVoQ11vkunKoAFdE3/hoGlMJ8yOobMubKwvSnowMOdKWvObarYBLj6Na59zHh
+# 3K3kGKDYwSNHR7OhD26jq22YBoMbt2pnLdK9RBqSEIGPsDsJ18ebMlrC/2pgVItJ
+# wZPt4bRc4G/rJvmM1bL5OBDm6s6R9b7T+2+TYTRcvJNFKIM2KmYoX7BzzosmJQay
+# g9Rc9hUZTO1i4F4z8ujo7AqnsAMrkbI2eb73rQgedaZlzLvjSFDzd5Ea/ttQokbI
+# YViY9XwCFjyDKK05huzUtw1T0PhH5nUwjewwk3YUpltLXXRhTT8SkXbev1jLchAp
+# QfDVxW0mdmgRQRNYmtwmKwH0iU1Z23jPgUo+QEdfyYFQc4UQIyFZYIpkVMHMIRro
+# OBl8ZhzNeDhFMJlP/2NPTLuqDQhTQXxYPUez+rbsjDIJAsxsPAxWEQIDAQABo4IB
+# WTCCAVUwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUaDfg67Y7+F8Rhvv+
+# YXsIiGX0TkIwHwYDVR0jBBgwFoAU7NfjgtJxXWRM3y5nP+e6mK4cD08wDgYDVR0P
+# AQH/BAQDAgGGMBMGA1UdJQQMMAoGCCsGAQUFBwMDMHcGCCsGAQUFBwEBBGswaTAk
+# BggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEEGCCsGAQUFBzAC
+# hjVodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRUcnVzdGVkUm9v
+# dEc0LmNydDBDBgNVHR8EPDA6MDigNqA0hjJodHRwOi8vY3JsMy5kaWdpY2VydC5j
+# b20vRGlnaUNlcnRUcnVzdGVkUm9vdEc0LmNybDAcBgNVHSAEFTATMAcGBWeBDAED
+# MAgGBmeBDAEEATANBgkqhkiG9w0BAQwFAAOCAgEAOiNEPY0Idu6PvDqZ01bgAhql
+# +Eg08yy25nRm95RysQDKr2wwJxMSnpBEn0v9nqN8JtU3vDpdSG2V1T9J9Ce7FoFF
+# UP2cvbaF4HZ+N3HLIvdaqpDP9ZNq4+sg0dVQeYiaiorBtr2hSBh+3NiAGhEZGM1h
+# mYFW9snjdufE5BtfQ/g+lP92OT2e1JnPSt0o618moZVYSNUa/tcnP/2Q0XaG3Ryw
+# YFzzDaju4ImhvTnhOE7abrs2nfvlIVNaw8rpavGiPttDuDPITzgUkpn13c5Ubdld
+# AhQfQDN8A+KVssIhdXNSy0bYxDQcoqVLjc1vdjcshT8azibpGL6QB7BDf5WIIIJw
+# 8MzK7/0pNVwfiThV9zeKiwmhywvpMRr/LhlcOXHhvpynCgbWJme3kuZOX956rEnP
+# LqR0kq3bPKSchh/jwVYbKyP/j7XqiHtwa+aguv06P0WmxOgWkVKLQcBIhEuWTatE
+# QOON8BUozu3xGFYHKi8QxAwIZDwzj64ojDzLj4gLDb879M4ee47vtevLt/B3E+bn
+# KD+sEq6lLyJsQfmCXBVmzGwOysWGw/YmMwwHS6DTBwJqakAwSEs0qFEgu60bhQji
+# WQ1tygVQK+pKHJ6l/aCnHwZ05/LWUpD9r4VIIflXO7ScA+2GRfS0YW6/aOImYIbq
+# yK+p/pQd52MbOoZWeE4wggdnMIIFT6ADAgECAhAMIw8D+RyJXSpe6W2wChjmMA0G
+# CSqGSIb3DQEBCwUAMGkxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwg
+# SW5jLjFBMD8GA1UEAxM4RGlnaUNlcnQgVHJ1c3RlZCBHNCBDb2RlIFNpZ25pbmcg
+# UlNBNDA5NiBTSEEzODQgMjAyMSBDQTEwHhcNMjQxMTEyMDAwMDAwWhcNMjUxMTEx
+# MjM1OTU5WjCB7zETMBEGCysGAQQBgjc8AgEDEwJVUzEZMBcGCysGAQQBgjc8AgEC
+# EwhEZWxhd2FyZTEdMBsGA1UEDwwUUHJpdmF0ZSBPcmdhbml6YXRpb24xEDAOBgNV
+# BAUTBzUyODAzOTQxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIEwVUZXhhczETMBEGA1UE
+# BxMKUm91bmQgUm9jazEfMB0GA1UEChMWRGVsbCBUZWNobm9sb2dpZXMgSW5jLjEY
+# MBYGA1UECxMPQ2xpZW50IFNvZnR3YXJlMR8wHQYDVQQDExZEZWxsIFRlY2hub2xv
+# Z2llcyBJbmMuMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEApEoeqEUs
+# dZ32U2mG6sAJHxz/GWksveUj0v3F76QWOdmpmt0y12/rPeDTWnM8wqbWN+zrPkvJ
+# kNcfNn7MFvXOYNm2hlKk5Hh1+KafmEYtddMo2hLa/OXq2+7j74ZO0NiBcx9t/auh
+# cGK7HU2NL0HSnJg2vRcXHIhae4ObuYoTyGtTp+1BhW6nQfStdl9MK77IFG6ysEmR
+# J6/HThfW+LiwwKC4Xb4O05AMM3m8o7m4/OqZ41ryiCl/SWrEODs9kQIUEhPV+5gE
+# tKKHocPxLGerA5cOh4mp3n3vCR2jg68w2Q6o8BqAwTl3ZBoIAF6QFJf58Q2bC2uD
+# cnfBSitF2BVWPknLYWKvf+f40oz/rIZR59L1YJyfXSDqzYVRAZzPSgtLTIyqKXQL
+# NgIFuLhKau6oJUTYg5gVD0XLa3GuBAdZ7vawgbhy0557O5UVSKYQM5KSBWLcxFWZ
+# KLtCWjy7nCjC/3bxFGIjsAV1L0sUaTp8uNKelfY3Zwo25/7oFCuXzkunAgMBAAGj
+# ggICMIIB/jAfBgNVHSMEGDAWgBRoN+Drtjv4XxGG+/5hewiIZfROQjAdBgNVHQ4E
+# FgQUj+GRne5IitwePzNKQ37PnBQQk4AwPQYDVR0gBDYwNDAyBgVngQwBAzApMCcG
+# CCsGAQUFBwIBFhtodHRwOi8vd3d3LmRpZ2ljZXJ0LmNvbS9DUFMwDgYDVR0PAQH/
+# BAQDAgeAMBMGA1UdJQQMMAoGCCsGAQUFBwMDMIG1BgNVHR8Ega0wgaowU6BRoE+G
+# TWh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFRydXN0ZWRHNENvZGVT
+# aWduaW5nUlNBNDA5NlNIQTM4NDIwMjFDQTEuY3JsMFOgUaBPhk1odHRwOi8vY3Js
+# NC5kaWdpY2VydC5jb20vRGlnaUNlcnRUcnVzdGVkRzRDb2RlU2lnbmluZ1JTQTQw
+# OTZTSEEzODQyMDIxQ0ExLmNybDCBlAYIKwYBBQUHAQEEgYcwgYQwJAYIKwYBBQUH
+# MAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBcBggrBgEFBQcwAoZQaHR0cDov
+# L2NhY2VydHMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VHJ1c3RlZEc0Q29kZVNpZ25p
+# bmdSU0E0MDk2U0hBMzg0MjAyMUNBMS5jcnQwCQYDVR0TBAIwADANBgkqhkiG9w0B
+# AQsFAAOCAgEAVae7xPmmUpmMGAue/qi8M2OL3V7Szx7tATAvj6C/BNF16K/uRZCA
+# wh2F1EdoEn7zrqqW9mOt00fnet5a+VlgPNx7r7qHcK/3SrVJcBCIkc3SDeqU+Qw7
+# 2C4WTv2z5zzs0kiFiZU0Vsdd0paZ/RymSQ9bIbRxDULiGxG2qrCwxgn8vVxm8o6N
+# nWkeOeZhCi1b1lgwXQqpKnDdfPOd0toZ5uqO+Iii5ZhRqmnuxXtu0lGrN34Wnm8I
+# FM2lVuRwAX+nPmQLvC5up82otQylg1BvT9erNQkLyaqGtDojtM7DQXpphTnqxOW2
+# ye7xSvaL7wvhIr+WHqw1ygWyI1h5Ej3QJoFroZ7HmyWjKvAEEY19qL4M+QwpeYo3
+# JsjjP03eFsY8QSw56WEzQE3bwz7PT6MuwCrbnrjcmu6lew2sm9kzgGyCbhM22MXm
+# eNkMR2/0yv2bFAkMRUWTZTzb0XFpsXwfcndEVI6dLrr/UQTJSmEkTgpIoIDa6LP8
+# ibZyQyWKiOrpdv41Ghex7dC3KnXSdUkbZ3NikVLeRMlz2SwtcrMJ3ZZRpS4brjFN
+# qbb3miTfyAHEQDTvS0nstqYMwBHhV2dVvmHDRfjlRIG2A4q3wmBYeA/mw51/tdnn
+# tluh7+DDE+E/hAs+Mb0N47ruOqXlxhR/qIVggmJdkNqhGHGn7Fhk7EwxghoOMIIa
+# CgIBATB9MGkxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjFB
+# MD8GA1UEAxM4RGlnaUNlcnQgVHJ1c3RlZCBHNCBDb2RlIFNpZ25pbmcgUlNBNDA5
+# NiBTSEEzODQgMjAyMSBDQTECEAwjDwP5HIldKl7pbbAKGOYwDQYJYIZIAWUDBAIB
+# BQCggaYwGQYJKoZIhvcNAQkDMQwGCisGAQQBgjcCAQQwHAYKKwYBBAGCNwIBCzEO
+# MAwGCisGAQQBgjcCARUwLwYJKoZIhvcNAQkEMSIEIIC5hhkhPLGi77K+VGPuyHr5
+# w6plKSq4EyA2HFp2XG+5MDoGCisGAQQBgjcCAQwxLDAqoCiAJgBEAGUAbABsACAA
+# VQBwAGQAYQB0AGUAIABQAGEAYwBrAGEAZwBlMA0GCSqGSIb3DQEBAQUABIIBgEKZ
+# CeBWDfBGFBDa0w3XFfawaUEDippjRobvaw022IU1ttB+87bQv1VkpJFj6E1qMsHa
+# m/hDYIeA18daiABj5WqjsVGlorzrur23cT6heVRc0ywYDuU55A1HGrh4qSNNgNWx
+# ZP+JQmpSLCh6BB4/AT+r8LilnSP+lSI1GDAr+dWjHZjHa5pNdmqXs+AsttR4Mzdo
+# uFpqmlyF4Q8Sjsg1hHhewhjvSQk+YGaVpkD0mLKDSPQU4VjcJ/I54PPAdudcvYBW
+# plAUUlfTZFqnP02xaIS+KqjaROaWCDXbM1He3gMD4B2x74WOOBeDHm8R9vdfYm4w
+# 2zhbSDVz/JuSbwt86t/+gixI6aWCD0dKXueW4f2tBkp5nu/eZncgfenwf4v4QFg8
+# jIdq0rRAlwUVSSC/zDiBrc83LX/fKQzdoNyIGvPTDPFE95J3lN9omRvFgH5GYsmg
+# diH5RPhNPCOdv2R/ziMdcLVLm4PZDm3QJ1l6TdODUzqKa2J8uqKNA1lEhfQSaKGC
+# Fzkwghc1BgorBgEEAYI3AwMBMYIXJTCCFyEGCSqGSIb3DQEHAqCCFxIwghcOAgED
+# MQ8wDQYJYIZIAWUDBAIBBQAwdwYLKoZIhvcNAQkQAQSgaARmMGQCAQEGCWCGSAGG
+# /WwHATAxMA0GCWCGSAFlAwQCAQUABCB6Cvrv7L4XENJyIMA74TdgxppUIHPTO5Z0
+# sEh9q5Xw2wIQEn1vAMLpFsMRfvRBRCa4ghgPMjAyNTAxMDMxMjA2MzJaoIITAzCC
+# BrwwggSkoAMCAQICEAuuZrxaun+Vh8b56QTjMwQwDQYJKoZIhvcNAQELBQAwYzEL
+# MAkGA1UEBhMCVVMxFzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTswOQYDVQQDEzJE
+# aWdpQ2VydCBUcnVzdGVkIEc0IFJTQTQwOTYgU0hBMjU2IFRpbWVTdGFtcGluZyBD
+# QTAeFw0yNDA5MjYwMDAwMDBaFw0zNTExMjUyMzU5NTlaMEIxCzAJBgNVBAYTAlVT
+# MREwDwYDVQQKEwhEaWdpQ2VydDEgMB4GA1UEAxMXRGlnaUNlcnQgVGltZXN0YW1w
+# IDIwMjQwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQC+anOf9pUhq5Yw
+# ultt5lmjtej9kR8YxIg7apnjpcH9CjAgQxK+CMR0Rne/i+utMeV5bUlYYSuuM4vQ
+# ngvQepVHVzNLO9RDnEXvPghCaft0djvKKO+hDu6ObS7rJcXa/UKvNminKQPTv/1+
+# kBPgHGlP28mgmoCw/xi6FG9+Un1h4eN6zh926SxMe6We2r1Z6VFZj75MU/HNmtsg
+# tFjKfITLutLWUdAoWle+jYZ49+wxGE1/UXjWfISDmHuI5e/6+NfQrxGFSKx+rDdN
+# MsePW6FLrphfYtk/FLihp/feun0eV+pIF496OVh4R1TvjQYpAztJpVIfdNsEvxHo
+# fBf1BWkadc+Up0Th8EifkEEWdX4rA/FE1Q0rqViTbLVZIqi6viEk3RIySho1XyHL
+# IAOJfXG5PEppc3XYeBH7xa6VTZ3rOHNeiYnY+V4j1XbJ+Z9dI8ZhqcaDHOoj5KGg
+# 4YuiYx3eYm33aebsyF6eD9MF5IDbPgjvwmnAalNEeJPvIeoGJXaeBQjIK13SlnzO
+# DdLtuThALhGtyconcVuPI8AaiCaiJnfdzUcb3dWnqUnjXkRFwLtsVAxFvGqsxUA2
+# Jq/WTjbnNjIUzIs3ITVC6VBKAOlb2u29Vwgfta8b2ypi6n2PzP0nVepsFk8nlcuW
+# fyZLzBaZ0MucEdeBiXL+nUOGhCjl+QIDAQABo4IBizCCAYcwDgYDVR0PAQH/BAQD
+# AgeAMAwGA1UdEwEB/wQCMAAwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwgwIAYDVR0g
+# BBkwFzAIBgZngQwBBAIwCwYJYIZIAYb9bAcBMB8GA1UdIwQYMBaAFLoW2W1NhS9z
+# KXaaL3WMaiCPnshvMB0GA1UdDgQWBBSfVywDdw4oFZBmpWNe7k+SH3agWzBaBgNV
+# HR8EUzBRME+gTaBLhklodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRU
+# cnVzdGVkRzRSU0E0MDk2U0hBMjU2VGltZVN0YW1waW5nQ0EuY3JsMIGQBggrBgEF
+# BQcBAQSBgzCBgDAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29t
+# MFgGCCsGAQUFBzAChkxodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNl
+# cnRUcnVzdGVkRzRSU0E0MDk2U0hBMjU2VGltZVN0YW1waW5nQ0EuY3J0MA0GCSqG
+# SIb3DQEBCwUAA4ICAQA9rR4fdplb4ziEEkfZQ5H2EdubTggd0ShPz9Pce4FLJl6r
+# eNKLkZd5Y/vEIqFWKt4oKcKz7wZmXa5VgW9B76k9NJxUl4JlKwyjUkKhk3aYx7D8
+# vi2mpU1tKlY71AYXB8wTLrQeh83pXnWwwsxc1Mt+FWqz57yFq6laICtKjPICYYf/
+# qgxACHTvypGHrC8k1TqCeHk6u4I/VBQC9VK7iSpU5wlWjNlHlFFv/M93748YTeoX
+# U/fFa9hWJQkuzG2+B7+bMDvmgF8VlJt1qQcl7YFUMYgZU1WM6nyw23vT6QSgwX5P
+# q2m0xQ2V6FJHu8z4LXe/371k5QrN9FQBhLLISZi2yemW0P8ZZfx4zvSWzVXpAb9k
+# 4Hpvpi6bUe8iK6WonUSV6yPlMwerwJZP/Gtbu3CKldMnn+LmmRTkTXpFIEB06nXZ
+# rDwhCGED+8RsWQSIXZpuG4WLFQOhtloDRWGoCwwc6ZpPddOFkM2LlTbMcqFSzm4c
+# d0boGhBq7vkqI1uHRz6Fq1IX7TaRQuR+0BGOzISkcqwXu7nMpFu3mgrlgbAW+Bzi
+# kRVQ3K2YHcGkiKjA4gi4OA/kz1YCsdhIBHXqBzR0/Zd2QwQ/l4Gxftt/8wY3grcc
+# /nS//TVkej9nmUYu83BDtccHHXKibMs/yXHhDXNkoPIdynhVAku7aRZOwqw6pDCC
+# Bq4wggSWoAMCAQICEAc2N7ckVHzYR6z9KGYqXlswDQYJKoZIhvcNAQELBQAwYjEL
+# MAkGA1UEBhMCVVMxFTATBgNVBAoTDERpZ2lDZXJ0IEluYzEZMBcGA1UECxMQd3d3
+# LmRpZ2ljZXJ0LmNvbTEhMB8GA1UEAxMYRGlnaUNlcnQgVHJ1c3RlZCBSb290IEc0
+# MB4XDTIyMDMyMzAwMDAwMFoXDTM3MDMyMjIzNTk1OVowYzELMAkGA1UEBhMCVVMx
+# FzAVBgNVBAoTDkRpZ2lDZXJ0LCBJbmMuMTswOQYDVQQDEzJEaWdpQ2VydCBUcnVz
+# dGVkIEc0IFJTQTQwOTYgU0hBMjU2IFRpbWVTdGFtcGluZyBDQTCCAiIwDQYJKoZI
+# hvcNAQEBBQADggIPADCCAgoCggIBAMaGNQZJs8E9cklRVcclA8TykTepl1Gh1tKD
+# 0Z5Mom2gsMyD+Vr2EaFEFUJfpIjzaPp985yJC3+dH54PMx9QEwsmc5Zt+FeoAn39
+# Q7SE2hHxc7Gz7iuAhIoiGN/r2j3EF3+rGSs+QtxnjupRPfDWVtTnKC3r07G1decf
+# BmWNlCnT2exp39mQh0YAe9tEQYncfGpXevA3eZ9drMvohGS0UvJ2R/dhgxndX7RU
+# CyFobjchu0CsX7LeSn3O9TkSZ+8OpWNs5KbFHc02DVzV5huowWR0QKfAcsW6Th+x
+# tVhNef7Xj3OTrCw54qVI1vCwMROpVymWJy71h6aPTnYVVSZwmCZ/oBpHIEPjQ2OA
+# e3VuJyWQmDo4EbP29p7mO1vsgd4iFNmCKseSv6De4z6ic/rnH1pslPJSlRErWHRA
+# KKtzQ87fSqEcazjFKfPKqpZzQmiftkaznTqj1QPgv/CiPMpC3BhIfxQ0z9JMq++b
+# Pf4OuGQq+nUoJEHtQr8FnGZJUlD0UfM2SU2LINIsVzV5K6jzRWC8I41Y99xh3pP+
+# OcD5sjClTNfpmEpYPtMDiP6zj9NeS3YSUZPJjAw7W4oiqMEmCPkUEBIDfV8ju2Tj
+# Y+Cm4T72wnSyPx4JduyrXUZ14mCjWAkBKAAOhFTuzuldyF4wEr1GnrXTdrnSDmuZ
+# DNIztM2xAgMBAAGjggFdMIIBWTASBgNVHRMBAf8ECDAGAQH/AgEAMB0GA1UdDgQW
+# BBS6FtltTYUvcyl2mi91jGogj57IbzAfBgNVHSMEGDAWgBTs1+OC0nFdZEzfLmc/
+# 57qYrhwPTzAOBgNVHQ8BAf8EBAMCAYYwEwYDVR0lBAwwCgYIKwYBBQUHAwgwdwYI
+# KwYBBQUHAQEEazBpMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5j
+# b20wQQYIKwYBBQUHMAKGNWh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdp
+# Q2VydFRydXN0ZWRSb290RzQuY3J0MEMGA1UdHwQ8MDowOKA2oDSGMmh0dHA6Ly9j
+# cmwzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydFRydXN0ZWRSb290RzQuY3JsMCAGA1Ud
+# IAQZMBcwCAYGZ4EMAQQCMAsGCWCGSAGG/WwHATANBgkqhkiG9w0BAQsFAAOCAgEA
+# fVmOwJO2b5ipRCIBfmbW2CFC4bAYLhBNE88wU86/GPvHUF3iSyn7cIoNqilp/GnB
+# zx0H6T5gyNgL5Vxb122H+oQgJTQxZ822EpZvxFBMYh0MCIKoFr2pVs8Vc40BIiXO
+# lWk/R3f7cnQU1/+rT4osequFzUNf7WC2qk+RZp4snuCKrOX9jLxkJodskr2dfNBw
+# CnzvqLx1T7pa96kQsl3p/yhUifDVinF2ZdrM8HKjI/rAJ4JErpknG6skHibBt94q
+# 6/aesXmZgaNWhqsKRcnfxI2g55j7+6adcq/Ex8HBanHZxhOACcS2n82HhyS7T6NJ
+# uXdmkfFynOlLAlKnN36TU6w7HQhJD5TNOXrd/yVjmScsPT9rp/Fmw0HNT7ZAmyEh
+# QNC3EyTN3B14OuSereU0cZLXJmvkOHOrpgFPvT87eK1MrfvElXvtCl8zOYdBeHo4
+# 6Zzh3SP9HSjTx/no8Zhf+yvYfvJGnXUsHicsJttvFXseGYs2uJPU5vIXmVnKcPA3
+# v5gA3yAWTyf7YGcWoWa63VXAOimGsJigK+2VQbc61RWYMbRiCQ8KvYHZE/6/pNHz
+# V9m8BPqC3jLfBInwAM1dwvnQI38AC+R2AibZ8GV2QqYphwlHK+Z/GqSFD/yYlvZV
+# VCsfgPrA8g4r5db7qS9EFUrnEw4d2zc4GqEr9u3WfPwwggWNMIIEdaADAgECAhAO
+# mxiO+dAt5+/bUOIIQBhaMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYTAlVTMRUw
+# EwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20x
+# JDAiBgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBDQTAeFw0yMjA4MDEw
+# MDAwMDBaFw0zMTExMDkyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRUwEwYDVQQKEwxE
+# aWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xITAfBgNVBAMT
+# GERpZ2lDZXJ0IFRydXN0ZWQgUm9vdCBHNDCCAiIwDQYJKoZIhvcNAQEBBQADggIP
+# ADCCAgoCggIBAL/mkHNo3rvkXUo8MCIwaTPswqclLskhPfKK2FnC4SmnPVirdprN
+# rnsbhA3EMB/zG6Q4FutWxpdtHauyefLKEdLkX9YFPFIPUh/GnhWlfr6fqVcWWVVy
+# r2iTcMKyunWZanMylNEQRBAu34LzB4TmdDttceItDBvuINXJIB1jKS3O7F5OyJP4
+# IWGbNOsFxl7sWxq868nPzaw0QF+xembud8hIqGZXV59UWI4MK7dPpzDZVu7Ke13j
+# rclPXuU15zHL2pNe3I6PgNq2kZhAkHnDeMe2scS1ahg4AxCN2NQ3pC4FfYj1gj4Q
+# kXCrVYJBMtfbBHMqbpEBfCFM1LyuGwN1XXhm2ToxRJozQL8I11pJpMLmqaBn3aQn
+# vKFPObURWBf3JFxGj2T3wWmIdph2PVldQnaHiZdpekjw4KISG2aadMreSx7nDmOu
+# 5tTvkpI6nj3cAORFJYm2mkQZK37AlLTSYW3rM9nF30sEAMx9HJXDj/chsrIRt7t/
+# 8tWMcCxBYKqxYxhElRp2Yn72gLD76GSmM9GJB+G9t+ZDpBi4pncB4Q+UDCEdslQp
+# JYls5Q5SUUd0viastkF13nqsX40/ybzTQRESW+UQUOsxxcpyFiIJ33xMdT9j7CFf
+# xCBRa2+xq4aLT8LWRV+dIPyhHsXAj6KxfgommfXkaS+YHS312amyHeUbAgMBAAGj
+# ggE6MIIBNjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTs1+OC0nFdZEzfLmc/
+# 57qYrhwPTzAfBgNVHSMEGDAWgBRF66Kv9JLLgjEtUYunpyGd823IDzAOBgNVHQ8B
+# Af8EBAMCAYYweQYIKwYBBQUHAQEEbTBrMCQGCCsGAQUFBzABhhhodHRwOi8vb2Nz
+# cC5kaWdpY2VydC5jb20wQwYIKwYBBQUHMAKGN2h0dHA6Ly9jYWNlcnRzLmRpZ2lj
+# ZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRJRFJvb3RDQS5jcnQwRQYDVR0fBD4wPDA6
+# oDigNoY0aHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZElE
+# Um9vdENBLmNybDARBgNVHSAECjAIMAYGBFUdIAAwDQYJKoZIhvcNAQEMBQADggEB
+# AHCgv0NcVec4X6CjdBs9thbX979XB72arKGHLOyFXqkauyL4hxppVCLtpIh3bb0a
+# FPQTSnovLbc47/T/gLn4offyct4kvFIDyE7QKt76LVbP+fT3rDB6mouyXtTP0UNE
+# m0Mh65ZyoUi0mcudT6cGAxN3J0TU53/oWajwvy8LpunyNDzs9wPHh6jSTEAZNUZq
+# aVSwuKFWjuyk1T3osdz9HNj0d1pcVIxv76FQPfx2CWiEn2/K2yCNNWAcAgPLILCs
+# WKAOQGPFmCLBsln1VWvPJ6tsds5vIy30fnFqI2si/xK4VC0nftg62fC2h5b9W9Fc
+# rBjDTZ9ztwGpn1eqXijiuZQxggN2MIIDcgIBATB3MGMxCzAJBgNVBAYTAlVTMRcw
+# FQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE7MDkGA1UEAxMyRGlnaUNlcnQgVHJ1c3Rl
+# ZCBHNCBSU0E0MDk2IFNIQTI1NiBUaW1lU3RhbXBpbmcgQ0ECEAuuZrxaun+Vh8b5
+# 6QTjMwQwDQYJYIZIAWUDBAIBBQCggdEwGgYJKoZIhvcNAQkDMQ0GCyqGSIb3DQEJ
+# EAEEMBwGCSqGSIb3DQEJBTEPFw0yNTAxMDMxMjA2MzJaMCsGCyqGSIb3DQEJEAIM
+# MRwwGjAYMBYEFNvThe5i29I+e+T2cUhQhyTVhltFMC8GCSqGSIb3DQEJBDEiBCBm
+# hOpahh04UgSgH4oWZMsx0HKTAYaUy13Nf27jRI7/pjA3BgsqhkiG9w0BCRACLzEo
+# MCYwJDAiBCB2dp+o8mMvH0MLOiMwrtZWdf7Xc9sF1mW5BZOYQ4+a2zANBgkqhkiG
+# 9w0BAQEFAASCAgCd9bjNa8LoZk8hTMqPo2xbzlZKcsHTW1g6dG0iG0e2oqz55Fb1
+# znxWUhAoo4lYzGNxUzjHjQ4YaSTuIaGOchTNJ0vw0qDnQkMGqMg9TC8Ohe47D6NK
+# ibATDHXDFu1j9bWc0hhQ9mkuielnfEZ77WKMI+wbe1/m1NLHXVUR0XNJe9yPxCni
+# adpK1a6aVuTjbVR7UwZmTRYwlkcS3SqTJOxVvYXI13FAHKlqLf0PmiIuK1awqITo
+# 9Xx//IkyVU6H/hDKgQeFPXKtmbyUUz9s3ZVadgVUrsP7ZEGagh4g+x1C2K13Ro9p
+# psJVwTIhYWmTjd7avgQpOGdYbC93N4K/4UI/z6vkarw1U37S1kAnZSQJotlOLbvo
+# jj3O2GMHUwesii6volXw6oE406TrMj3JoxG8KthreC13MjrkpvikQ0siJHi7N9RY
+# cyo6/79xs31HsOccNEovp4OpSmctKuLPahYATd2BJ0uNAC7wQ+AFvXBq8DkEBgqn
+# tXRe/ZxezEZMg3Qh7bqH/cDGaxkIouL1MEuj/WHydh2nEaFxu8zVOHIByCivRxce
+# Ox1/85xSYUhT4evcNYDD5Y0onMc8+jWivYlQtIE+4bUJtFmAQWN96gfsxx4ZSVSN
+# uuAChe8djhHFyVl/sSIKGhFP6NAsq7CKoKedFRxaGYgZ5A8GmISrDKqyuQ==
+# SIG # End signature block

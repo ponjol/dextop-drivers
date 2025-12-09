@@ -1,0 +1,98 @@
+;/*++
+;
+;Copyright (c) Microsoft Corporation.  All rights reserved.
+;
+;   THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+;   KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+;   IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+;   PURPOSE.
+;
+;Module Name:
+;
+;    MEP_Camera_Component.INF
+;
+;Abstract:
+;
+;    Component INF for Camera AI Effects
+;
+;--*/
+[Version]
+Signature = "$WINDOWS NT$"
+Class = SoftwareComponent
+ClassGuid = {5c4c3332-344d-483c-8739-259e934c9cc8}
+Provider = %MSFT%
+CatalogFile = mep_camera_component.cat
+DriverVer = 06/21/2024,1.0.41.0
+PnPLockDown=1
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+WindowsEffectsCameraMediaSource.dll = 1
+
+[DestinationDirs]
+MEPCamera_Component_CopyFiles = 13
+
+[Manufacturer]
+%MSFT_MTL% = CameraEffectsComponent,NTamd64.10.0...16299
+%MSFT_ARL% = CameraEffectsComponent,NTamd64.10.0...16299
+
+[CameraEffectsComponent.NTamd64.10.0...16299]
+%Device.ExtensionDesc% = CameraEffectsComponent_Install, SWC\MEP_CAM&VEN_8086_DEV_7D1D_V1
+%Device.ExtensionDesc% = CameraEffectsComponent_Install, SWC\MEP_CAM&VEN_8086_DEV_AD1D_V1
+
+[CameraEffectsComponent_Install]
+Include=umpass.inf
+Needs=UmPass
+CopyFiles=MEPCamera_Component_CopyFiles
+AddReg=EffectsCMS.AddReg
+
+[CameraEffectsComponent_Install.HW]               
+Include=umpass.inf
+Needs=UmPass.HW
+AddReg=CameraEffectsComponent_Install.HW.AddReg
+
+;Add the registry entries                                               
+[CameraEffectsComponent_Install.HW.AddReg]                                  
+HKR,,InterfaceGUIDs,0x10000,%KSCATEGORY_WINDOWS_CAMERAEFFECTS%   ; custom Interface GUID for Windows Camera Effects
+
+; Setup the UMPass service for the device
+[CameraEffectsComponent_Install.Services]
+Include=umpass.inf
+Needs=UmPass.Services
+
+[CameraEffectsComponent_Install.Interfaces]
+Include=umpass.inf
+Needs=UmPass.Interfaces
+AddInterface=%KSCATEGORY_WINDOWS_CAMERAEFFECTS%,,EffectsInterface
+
+[EffectsInterface]
+AddReg=EffectsInterface.AddReg
+
+[EffectsInterface.AddReg]
+HKR,,CLSID,,%ProxyVCap.CLSID%
+HKR,,CustomCaptureSourceClsid,,%CMS.CLSID%
+HKR,,FriendlyName,,"Windows Camera Effects"
+
+[MEPCamera_Component_CopyFiles]
+WindowsEffectsCameraMediaSource.dll
+
+[EffectsCMS.AddReg]
+HKCR,CLSID\%CMS.CLSID%,,,"Windows Camera Effects Custom Media Source"
+HKCR,CLSID\%CMS.CLSID%\InprocServer32,,%REG_EXPAND_SZ%,"%13%\WindowsEffectsCameraMediaSource.dll"
+HKCR,CLSID\%CMS.CLSID%\InprocServer32,ThreadingModel,,"Both"
+
+[Strings]
+; Non-localizable
+ProxyVCap.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_WINDOWS_CAMERAEFFECTS="{1D813233-9CDE-42BF-B446-8F47067B4946}"
+CMS.CLSID="{C1D740A8-BC18-43F4-A500-6BDF91839FDE}"
+REG_EXPAND_SZ=0x00020000
+
+; Localizable
+DiskId1="MicrosoftEffectPack"
+MSFT = "Microsoft Corporation"
+MSFT_MTL = "Microsoft Corporation"
+MSFT_ARL = "Microsoft Corporation"
+Device.ExtensionDesc = "Windows Camera Effects"
