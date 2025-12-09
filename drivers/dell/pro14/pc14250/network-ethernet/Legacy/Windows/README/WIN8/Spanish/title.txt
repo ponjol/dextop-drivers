@@ -1,1 +1,0 @@
-﻿SPA: "Manual del usuario del Controlador de la familia FE/GbE de Realtek"

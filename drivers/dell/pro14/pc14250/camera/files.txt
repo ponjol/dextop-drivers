@@ -1,2 +1,0 @@
-Camera_OptOut.inf
-Camera_OptOut.cat

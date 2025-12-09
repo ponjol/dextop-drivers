@@ -1,7 +1,0 @@
-MEP_MTL_ARL_v1.0.41.0/base/microsofteffectpack.cat
-MEP_MTL_ARL_v1.0.41.0/base/MicrosoftEffectPack.inf
-MEP_MTL_ARL_v1.0.41.0/base/PerceptionCore.dll
-MEP_MTL_ARL_v1.0.41.0/base/PerceptionCoreResources.dll
-MEP_MTL_ARL_v1.0.41.0/camera/mep_camera_component.cat
-MEP_MTL_ARL_v1.0.41.0/camera/mep_camera_component.inf
-MEP_MTL_ARL_v1.0.41.0/camera/WindowsEffectsCameraMediaSource.dll

@@ -1,1 +1,0 @@
-﻿SPA: "Manual del usuario del adaptador de red de la serie RTL81XX" 

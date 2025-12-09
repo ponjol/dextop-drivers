@@ -1,1 +1,0 @@
-﻿HUN: "Az RTL81XX sorozatú hálózati adapter felhasználói útmutatója" 

@@ -71,17 +71,6 @@
       "files": []
     },
     {
-      "PackageID": "HTM0H",
-      "Name": "Intel Platform Monitoring Technology Driver",
-      "Version": "5.2.3.4",
-      "DeviceMatch": "Intel PMT (PCI 7D0D)",
-      "Manufacturer Notes": "DCH PCI match",
-      "Dev Notes": "Packaged via file structure (No bin, cat, inf or sys files?) Removed from package for now until understanding how it works with pnputil",
-      "Restart": "Required",
-      "Category": "chipset-platform-monitoring",
-      "files": []
-    },
-    {
       "PackageID": "0966F",
       "Name": "Intel Rapid Storage Technology Driver and Application",
       "Version": "20.2.6.1025",
@@ -90,17 +79,6 @@
       "Dev Notes": "Packaged via file structure",
       "Restart": "Required",
       "Category": "storage-rst",
-      "files": []
-    },
-    {
-      "PackageID": "DFMF0",
-      "Name": "Intel Innovation Platform Framework Driver",
-      "Version": "2.2.10204.7",
-      "DeviceMatch": "IPF Processor Participant (PCI 7D03); ACPI INTC1062/1064/1042",
-      "Manufacturer Notes": "Multiple ACPI participants",
-      "Dev Notes": "Packaged via file structure (No bin, cat, inf or sys files?) Removed from package for now until understanding how it works with pnputil",
-      "Restart": "Required",
-      "Category": "chipset-innovation-platform",
       "files": []
     },
     {
@@ -116,17 +94,6 @@
       "files": []
     },
     {
-      "PackageID": "K87XM",
-      "Name": "Intel HID Event Filter Driver",
-      "Version": "2.2.2.11",
-      "DeviceMatch": "ACPI INTC1077",
-      "Manufacturer Notes": "",
-      "Dev Notes": "Packaged via file structure (No bin, cat, inf or sys files?) Removed from package for now until understanding how it works with pnputil",
-      "Restart": "Required",
-      "Category": "hid-event-filter",
-      "files": []
-    },
-    {
       "PackageID": "9P1YM",
       "Name": "Intel Wi-Fi Driver (BE2xx/AX4xx/AX2xx/9xxx)",
       "Version": "23.160.0.4",
@@ -135,17 +102,6 @@
       "Dev Notes": "Packaged via file structure",
       "Restart": "Required",
       "Category": "network-wifi",
-      "files": []
-    },
-    {
-      "PackageID": "3G2NM",
-      "Name": "Fingerprint Sensor Driver",
-      "Version": "4.10.6.380",
-      "DeviceMatch": "Synaptics UWP WBDI (USB VID_06CB&amp;amp;PID_0173)",
-      "Manufacturer Notes": "Latest among fingerprint packages",
-      "Dev Notes": "Packaged via file structure (No bin, cat, inf or sys files?) Removed from package for now until understanding how it works with pnputil",
-      "Restart": "Required",
-      "Category": "biometrics-fingerprint",
       "files": []
     },
     {
